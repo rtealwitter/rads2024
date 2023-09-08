@@ -1,0 +1,41 @@
+---
+title: "**CSCI 1052: Randomized Algorithms for Data Science**"
+output:
+  html_document:
+    css: styles.css
+---
+
+<center>
+An introduction to algorithms for efficiently finding patterns in large-scale data.
+</center>
+
+<br>
+
+<div class="row">
+  <div class="col-md-6" markdown="1">
+  **Instructor**: [R. Teal Witter](https://www.rtealwitter.com/). Please call me Teal.
+  
+  **Class Times**: We meet Monday, Tuesday, Wednesday, and Thursday in TBD. The lecture is from 10am to noon and the lab is from 2 to 3pm.
+  
+  **Office Hours**: I will hold office hours in TBD from 3 to 4pm.
+  
+  **Participation**: I expect you to engage in class, ask questions, and make connections. So that I can get a sense of how you're doing, please fill out [this](https://forms.gle/eGsWdeVeVEo2q7uH7) form once per lecture. (You will receive one point per lecture if you answer the form.)
+  
+  **Discussion**: Please post all your course related questions on [Canvas](https://middlebury.instructure.com/courses/11668). If your question reveals your solution to a homework problem, please email me instead.
+  
+  </div>
+  **Assignments**: I will give you one problem per class. I expect you to solve the problem with your group during the collaboration time (I'll be there to answer questions and provide hints). Once you have solved the problem, you should write up your solution on your own. In addition, there will be a project on a lecture topic of your choice.
+  
+  <div class="col-md-6" markdown="1">
+  Assignment | Work Due 
+  :--- | :--- 
+  [Problem Set 1](files/psets/pset1.pdf) ([LaTeX](files/psets/pset1.tex)) | Friday 1/13 
+  </div>
+</div>
+
+**Resources**: This class uses material from Chris Musco's phenomenal graduate Algorithmic Machine Learning and Data Science [course](https://chrismusco.com/amlds2023/) at NYU Tandon. For each class, I will post my handwritten notes and the written material I used to prepare.
+
+<tr>
+Class | Topic | Notes | Slides </tr><tr>
+:--- | :--- | :--- | :--- |
+Thursday 1/5   | Introduction: Set Size Estimation | [Notes](files/notes/notes01.html) |  | </tr><tr>

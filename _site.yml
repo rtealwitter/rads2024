@@ -1,0 +1,8 @@
+name: "Randomized Algorithms for Data Science"
+output_dir: 'docs'
+output:
+  html_document:
+    includes:
+      in_header: header.html
+    theme: cosmo
+    highlight: textmate
