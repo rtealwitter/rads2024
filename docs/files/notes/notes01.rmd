@@ -12,9 +12,9 @@ output:
 Powered by repeated innovations in chip manufacturing,
 computers have grown exponentially more powerful over the last several decades.
 As a result, we have access to unparalleled computational resources and data.
-For example, NASA collects 6.4 terabytes of satellite images (check),
-X institute sequences 24 terabytes of genomic data (check), and
-Google receives X search queries (check) *every single day*.
+For example, a [single NASA satellite](https://www.earthdata.nasa.gov/learn/articles/swot-calibration-validation) collects 20 terabytes of satellite images,
+more than 8 billion [searches](https://fitsmallbusiness.com/google-search-statistics/) are made on Google,
+and [estimates](https://explodingtopics.com/blog/data-generated-per-day) suggest the internet creates more than 300 million terabytes of data *every single day*.
 Simultaneously, we are quickly approaching the physical limit 
 of how many transistors can be packed on a single chip.
 In order to learn from the data we have and continue expanding our
@@ -31,9 +31,7 @@ while still returning an *approximately* correct result.
 
 We can run randomized algorithms in practice to see how well they work.
 But we also want to *prove* that they work and understand why.
-We will use probability tools to analyze the behavior of randomized algorithms.
-Today, our goal is to see how we can build a powerful algorithm using 
-only simple probability tools.
+Today, we will analyze a powerful algorithm using only simple probability tools.
 
 ### Probability Background
 
@@ -42,14 +40,14 @@ For example, $X$ could be the outcome of a fair dice roll
 and be equal to $1,2,3,4,5$ or $6$, each with probability $\frac{1}{6}$.
 Formally, we use $\Pr(X=x)$ to represent the probability
 that the random variable $X$ is equal to the outcome $x$.
-The expected value of a discrete random variable is
+The expectation of a discrete random variable is
 $$
 \mathbb{E}[X] = \sum_{x} x \Pr(X=x).
 $$
-For example, the expected outcome of the fair dice roll is
+For example, the expected outcome of a fair dice roll is
 $\mathbb{E}[X] = 1 \times \frac{1}{6} + 2 \times \frac{1}{6} + 3 \times \frac{1}{6} +
 4 \times \frac{1}{6} + 5 \times \frac{1}{6} + 6 \times \frac{1}{6} = \frac{21}{6}$.
-If the random variable is continuous, we can similarly define its expected value
+Note: If the random variable is continuous, we can similarly define its expected value
 using an integral.
 
 The expected value tells us where the random variable is on average but
@@ -80,7 +78,7 @@ Using the definitions of expectated value and variance,
 can you prove to yourself why both equations hold?
 
 Once we have defined random variables, we are often interested in events
-defined on the outcome space.
+defined on their outcomes.
 Let $A$ and $B$ be two events.
 For example, $A$ could be the event that the dice shows $1$ or $2$ while
 $B$ could be the event that the dice shows an odd number.
@@ -118,8 +116,10 @@ $\Pr(X=x \cap Y=y) = \Pr(X=x) \Pr(Y=y)$.
 ### Linearity of Expectation
 One of the most powerful theorems in all of probability is the linearity
 of expectation.
+
+**Theorem:**
 Let $X$ and $Y$ be random variables.
-Then the theorem states that
+Then
 $$
 \mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y].
 $$
@@ -141,24 +141,25 @@ Or, if not, what assumptions they require?
 We'll pose a problem that has applications in ecology, social networks,
 and internet indexing.
 However, while efficiently solving the problem is useful, 
-our purpose is really to gain familiarity with linearity of expectation.
+our purpose is really to gain familiarity with linearity of expectation
+and Markov's inequality.
 
 Suppose you run a website that is considering contracting with
 a company to provide CAPTCHAs for login verification.
-The company claims to have a database with $n=1,000,000$ unique CAPTCHAs.
+The company claims to have a database with $n=1000000$ unique CAPTCHAs.
 For each API call, they'll return a CAPTCHA chosen uniformly at random
 from their database.
 Here's our problem:
 How many queries $m$ do we need to make to their API until we can
-independently verify that they have a million CAPTCHAs?
+independently verify that they do in fact have a million CAPTCHAs?
 
 An obvious approach is to keep calling ther API until we find a million
 unique CAPTCHAs.
-Of course, the problem is that we have to make at least a million API calls.
-That's a problem if we care about efficiency, they charge us per call,
+Of course, the issue is that we have to make at least a million API calls.
+That's not so good if we care about efficiency, they charge us per call,
 or the size of they claim to have in their database is much bigger than a million.
 
-A second, more clever approach is to call their API and count duplicates.
+A more clever approach is to call their API and count duplicates.
 Intuitively, the larger their database, the fewer duplicates we expect to see.
 Define a random variable $D_{i,j}$ which is 1 if the 
 $i$th and $j$th calls return the same CAPTCHA and 0 otherwise.
@@ -196,15 +197,67 @@ $$
 = \binom{m}{2} \frac{1}{n} = \frac{m(m-1)}{2n}.
 $$
 
+Suppose we take $m=1000$ queries and see $D=10$ duplicates.
+How does this compare to what we would expect if the database had $n=1000000$
+CAPTCHAs?
+
+Well, the expectation would be $\mathbb{E}[D] = \frac{1000 \times 999}{2 \times 1000000} = .4995$.
+Something seems wrong... we observed many more duplicates than we expect.
+Can we formalize this intuition?
+
+### Markov's Inequality
+
+Concentration inequalities are a powerful tool in the analysis of
+randomized algorithms.
+They tell us how likely it is that a random variable differs from
+its expectation.
+
+There are many concentration inequalities.
+Some apply in general and some apply only under special assumptions.
+The concentration inequalities that apply only under special assumptions
+tend to give stronger results.
+We'll start with one of the most simple and general
+concentration inequalities.
+
+**Theorem**: For any non-negative random variable $X$
+and any positive threshold $t$,
+$$
+\Pr(X \geq t) \leq \frac{\mathbb{E}[X]}{t}.
+$$
+
+We'll prove the inequality directly.
+By the definition of expectation, we have
+$$
+\mathbb{E}[X] = \sum_{x} x \Pr(X=x)
+= \sum_{\substack{x \\ x \geq t}} x \Pr(X=x) + 
+\sum_{\substack{x \\ x < t}} x \Pr(X=x)
+\geq \sum_{\substack{x \\ x \geq t}} t \Pr(X=x) + 0
+= t \Pr(X \geq t).
+$$
+Rearranging the above inequality gives Markov's.
+Can you see where we used that all outcomes $x$ are non-negative?
+
+Now let's apply Markov's inequality to our set size estimation problem.
+Since the number of duplicates $D$ is always positive, we satisfy the assumption
+of the inequality.
+$$
+\Pr(D \geq 10 ) \leq \frac{\mathbb{E}[D]}{10} = \frac{.4995}{10} = .04995
+$$
+The probability of observing the 10 duplicates is less than $5\%$!
+We should probably start asking the CAPTCHA company some questions.
 
 
+In practice, many of the set size estimation problems are slightly different.
+Instead of checking a claim about the set size, we want to estimate the set
+size directly.
+Notice that we computed $\mathbb{E}[D] = \frac{m(m-1)}{2n}$.
+Rearranging, we see that $n = \frac{m(m-1)}{2\mathbb{E}[D]}$.
+Given $m$ samples, we can naturally build an estimator for the
+whole set size using the empirical number of duplicates we found in the sample.
+With a few more applications of Markov's inequality, we can show that
 
-
-
-
-
-
-
+**Claim**: If we make $m = \Omega(\frac{\sqrt{n}}{\epsilon})$ samples, then
+the estimate $\hat{n} = \frac{m(m-1)}{2D}$ satisfies $(1-\epsilon) n \leq \hat{n} \leq (1+\epsilon) n$ with probability $9/10$.
 
 
 

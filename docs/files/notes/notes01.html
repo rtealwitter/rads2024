@@ -360,14 +360,16 @@ Estimation</strong></h1>
 <p>Powered by repeated innovations in chip manufacturing, computers have
 grown exponentially more powerful over the last several decades. As a
 result, we have access to unparalleled computational resources and data.
-For example, NASA collects 6.4 terabytes of satellite images (check), X
-institute sequences 24 terabytes of genomic data (check), and Google
-receives X search queries (check) <em>every single day</em>.
-Simultaneously, we are quickly approaching the physical limit of how
-many transistors can be packed on a single chip. In order to learn from
-the data we have and continue expanding our computational abilities into
-the future, fast and efficient algorithms are more important than
-ever.</p>
+For example, a <a href="https://www.earthdata.nasa.gov/learn/articles/swot-calibration-validation">single
+NASA satellite</a> collects 20 terabytes of satellite images, more than
+8 billion <a href="https://fitsmallbusiness.com/google-search-statistics/">searches</a>
+are made on Google, and <a href="https://explodingtopics.com/blog/data-generated-per-day">estimates</a>
+suggest the internet creates more than 300 million terabytes of data
+<em>every single day</em>. Simultaneously, we are quickly approaching
+the physical limit of how many transistors can be packed on a single
+chip. In order to learn from the data we have and continue expanding our
+computational abilities into the future, fast and efficient algorithms
+are more important than ever.</p>
 <p>At first glance, an algorithm that performs only a few operations per
 item in our data set is efficient. However, these algorithms can be too
 slow when we have lots and lots of data. Instead, we turn to randomized
@@ -377,9 +379,8 @@ data set (or use only a small amount of space) while still returning an
 <em>approximately</em> correct result.</p>
 <p>We can run randomized algorithms in practice to see how well they
 work. But we also want to <em>prove</em> that they work and understand
-why. We will use probability tools to analyze the behavior of randomized
-algorithms. Today, our goal is to see how we can build a powerful
-algorithm using only simple probability tools.</p>
+why. Today, we will analyze a powerful algorithm using only simple
+probability tools.</p>
 </div>
 <div id="probability-background" class="section level3">
 <h3>Probability Background</h3>
@@ -387,14 +388,13 @@ algorithm using only simple probability tools.</p>
 For example, <span class="math inline">\(X\)</span> could be the outcome
 of a fair dice roll and be equal to <span class="math inline">\(1,2,3,4,5\)</span> or <span class="math inline">\(6\)</span>, each with probability <span class="math inline">\(\frac{1}{6}\)</span>. Formally, we use <span class="math inline">\(\Pr(X=x)\)</span> to represent the probability
 that the random variable <span class="math inline">\(X\)</span> is equal
-to the outcome <span class="math inline">\(x\)</span>. The expected
-value of a discrete random variable is <span class="math display">\[
+to the outcome <span class="math inline">\(x\)</span>. The expectation
+of a discrete random variable is <span class="math display">\[
 \mathbb{E}[X] = \sum_{x} x \Pr(X=x).
-\]</span> For example, the expected outcome of the fair dice roll is
-<span class="math inline">\(\mathbb{E}[X] = 1 \times \frac{1}{6} + 2
-\times \frac{1}{6} + 3 \times \frac{1}{6} + 4 \times \frac{1}{6} + 5
-\times \frac{1}{6} + 6 \times \frac{1}{6} = \frac{21}{6}\)</span>. If
-the random variable is continuous, we can similarly define its expected
+\]</span> For example, the expected outcome of a fair dice roll is <span class="math inline">\(\mathbb{E}[X] = 1 \times \frac{1}{6} + 2 \times
+\frac{1}{6} + 3 \times \frac{1}{6} + 4 \times \frac{1}{6} + 5 \times
+\frac{1}{6} + 6 \times \frac{1}{6} = \frac{21}{6}\)</span>. Note: If the
+random variable is continuous, we can similarly define its expected
 value using an integral.</p>
 <p>The expected value tells us where the random variable is on average
 but we’re also interested in how closely the random variable
@@ -419,7 +419,7 @@ variance. For example,</p>
 expectated value and variance, can you prove to yourself why both
 equations hold?</p>
 <p>Once we have defined random variables, we are often interested in
-events defined on the outcome space. Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be two events. For example, <span class="math inline">\(A\)</span> could be the event that the dice shows
+events defined on their outcomes. Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be two events. For example, <span class="math inline">\(A\)</span> could be the event that the dice shows
 <span class="math inline">\(1\)</span> or <span class="math inline">\(2\)</span> while <span class="math inline">\(B\)</span> could be the event that the dice shows
 an odd number. We use <span class="math inline">\(\Pr(A \cap B)\)</span>
 to denote the probability that events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> both happen. Often, we have information
@@ -450,9 +450,10 @@ Consider random variables <span class="math inline">\(X\)</span> and
 <div id="linearity-of-expectation" class="section level3">
 <h3>Linearity of Expectation</h3>
 <p>One of the most powerful theorems in all of probability is the
-linearity of expectation. Let <span class="math inline">\(X\)</span> and
-<span class="math inline">\(Y\)</span> be random variables. Then the
-theorem states that <span class="math display">\[
+linearity of expectation.</p>
+<p><strong>Theorem:</strong> Let <span class="math inline">\(X\)</span>
+and <span class="math inline">\(Y\)</span> be random variables. Then
+<span class="math display">\[
 \mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y].
 \]</span> The result is a powerful tool that requires <em>no
 assumptions</em> on the random variables.</p>
@@ -473,23 +474,23 @@ always true? Or, if not, what assumptions they require?</p>
 <p>We’ll pose a problem that has applications in ecology, social
 networks, and internet indexing. However, while efficiently solving the
 problem is useful, our purpose is really to gain familiarity with
-linearity of expectation.</p>
+linearity of expectation and Markov’s inequality.</p>
 <p>Suppose you run a website that is considering contracting with a
 company to provide CAPTCHAs for login verification. The company claims
-to have a database with <span class="math inline">\(n=1,000,000\)</span>
+to have a database with <span class="math inline">\(n=1000000\)</span>
 unique CAPTCHAs. For each API call, they’ll return a CAPTCHA chosen
 uniformly at random from their database. Here’s our problem: How many
 queries <span class="math inline">\(m\)</span> do we need to make to
-their API until we can independently verify that they have a million
-CAPTCHAs?</p>
+their API until we can independently verify that they do in fact have a
+million CAPTCHAs?</p>
 <p>An obvious approach is to keep calling ther API until we find a
-million unique CAPTCHAs. Of course, the problem is that we have to make
-at least a million API calls. That’s a problem if we care about
+million unique CAPTCHAs. Of course, the issue is that we have to make at
+least a million API calls. That’s not so good if we care about
 efficiency, they charge us per call, or the size of they claim to have
 in their database is much bigger than a million.</p>
-<p>A second, more clever approach is to call their API and count
-duplicates. Intuitively, the larger their database, the fewer duplicates
-we expect to see. Define a random variable <span class="math inline">\(D_{i,j}\)</span> which is 1 if the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th calls return the same CAPTCHA and 0
+<p>A more clever approach is to call their API and count duplicates.
+Intuitively, the larger their database, the fewer duplicates we expect
+to see. Define a random variable <span class="math inline">\(D_{i,j}\)</span> which is 1 if the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th calls return the same CAPTCHA and 0
 otherwise. (To avoid double counting, we’ll assume <span class="math inline">\(i &lt; j\)</span>.) For example, in the example
 below, the <span class="math inline">\(5\)</span>th, <span class="math inline">\(6\)</span>th, and <span class="math inline">\(7\)</span>th calls returned the same CAPTCHA so
 <span class="math inline">\(D_{5,6}\)</span>, <span class="math inline">\(D_{5,7}\)</span>, and <span class="math inline">\(D_{6,7}\)</span> are all 1.</p>
@@ -522,6 +523,57 @@ hand,</p>
 \frac{1}{n}
 = \binom{m}{2} \frac{1}{n} = \frac{m(m-1)}{2n}.
 \]</span></p>
+<p>Suppose we take <span class="math inline">\(m=1000\)</span> queries
+and see <span class="math inline">\(D=10\)</span> duplicates. How does
+this compare to what we would expect if the database had <span class="math inline">\(n=1000000\)</span> CAPTCHAs?</p>
+<p>Well, the expectation would be <span class="math inline">\(\mathbb{E}[D] = \frac{1000 \times 999}{2 \times
+1000000} = .4995\)</span>. Something seems wrong… we observed many more
+duplicates than we expect. Can we formalize this intuition?</p>
+</div>
+<div id="markovs-inequality" class="section level3">
+<h3>Markov’s Inequality</h3>
+<p>Concentration inequalities are a powerful tool in the analysis of
+randomized algorithms. They tell us how likely it is that a random
+variable differs from its expectation.</p>
+<p>There are many concentration inequalities. Some apply in general and
+some apply only under special assumptions. The concentration
+inequalities that apply only under special assumptions tend to give
+stronger results. We’ll start with one of the most simple and general
+concentration inequalities.</p>
+<p><strong>Theorem</strong>: For any non-negative random variable <span class="math inline">\(X\)</span> and any positive threshold <span class="math inline">\(t\)</span>, <span class="math display">\[
+\Pr(X \geq t) \leq \frac{\mathbb{E}[X]}{t}.
+\]</span></p>
+<p>We’ll prove the inequality directly. By the definition of
+expectation, we have <span class="math display">\[
+\mathbb{E}[X] = \sum_{x} x \Pr(X=x)
+= \sum_{\substack{x \\ x \geq t}} x \Pr(X=x) +
+\sum_{\substack{x \\ x &lt; t}} x \Pr(X=x)
+\geq \sum_{\substack{x \\ x \geq t}} t \Pr(X=x) + 0
+= t \Pr(X \geq t).
+\]</span> Rearranging the above inequality gives Markov’s. Can you see
+where we used that all outcomes <span class="math inline">\(x\)</span>
+are non-negative?</p>
+<p>Now let’s apply Markov’s inequality to our set size estimation
+problem. Since the number of duplicates <span class="math inline">\(D\)</span> is always positive, we satisfy the
+assumption of the inequality. <span class="math display">\[
+\Pr(D \geq 10 ) \leq \frac{\mathbb{E}[D]}{10} = \frac{.4995}{10} =
+.04995
+\]</span> The probability of observing the 10 duplicates is less than
+<span class="math inline">\(5\%\)</span>! We should probably start
+asking the CAPTCHA company some questions.</p>
+<p>In practice, many of the set size estimation problems are slightly
+different. Instead of checking a claim about the set size, we want to
+estimate the set size directly. Notice that we computed <span class="math inline">\(\mathbb{E}[D] = \frac{m(m-1)}{2n}\)</span>.
+Rearranging, we see that <span class="math inline">\(n =
+\frac{m(m-1)}{2\mathbb{E}[D]}\)</span>. Given <span class="math inline">\(m\)</span> samples, we can naturally build an
+estimator for the whole set size using the empirical number of
+duplicates we found in the sample. With a few more applications of
+Markov’s inequality, we can show that</p>
+<p><strong>Claim</strong>: If we make <span class="math inline">\(m =
+\Omega(\frac{\sqrt{n}}{\epsilon})\)</span> samples, then the estimate
+<span class="math inline">\(\hat{n} = \frac{m(m-1)}{2D}\)</span>
+satisfies <span class="math inline">\((1-\epsilon) n \leq \hat{n} \leq
+(1+\epsilon) n\)</span> with probability <span class="math inline">\(9/10\)</span>.</p>
 </div>
 
 
