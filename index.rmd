@@ -29,7 +29,7 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   <div class="col-md-6" markdown="1">
   Assignment | Work Due 
   :--- | :--- 
-  [Problem Set 1](files/psets/pset1.pdf) ([LaTeX](files/psets/pset1.tex)) | Friday 1/13 
+  [Problem Set 1](psets/pset.pdf) ([LaTeX](psets/pset.tex)) | Friday 1/13 
   </div>
 </div>
 
@@ -38,4 +38,4 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
 <tr>
 Class | Topic | Notes | Slides </tr><tr>
 :--- | :--- | :--- | :--- |
-Thursday 1/5   | Introduction: Set Size Estimation | [Notes](files/notes/notes01.html) |  | </tr><tr>
+Thursday 1/5   | Introduction: Set Size Estimation |  |  | </tr><tr>
