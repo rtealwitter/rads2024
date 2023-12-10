@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 A unifying theme of this course is how we deal with data in high dimensions.

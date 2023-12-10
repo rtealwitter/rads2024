@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 When we analyzed first order optimization, we were able to get a bound on the *iteration complexity* that did not depend on the dimension $d$.

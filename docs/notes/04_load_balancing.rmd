@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 We've seen how to apply linearity of variance and Chebyshev's inequality to the distinct elements problem.

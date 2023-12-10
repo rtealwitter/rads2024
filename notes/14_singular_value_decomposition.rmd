@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 The next part of this course will cover numerical linear algebra.

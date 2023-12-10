@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 We've seen saw the power of linearity of expectation, Markov's inequality, and the union bound.

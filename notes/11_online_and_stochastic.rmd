@@ -1,5 +1,5 @@
 ---
-title: "**Online and Stochastic Gradient Descent**
+title: "**Online and Stochastic Gradient Descent**"
 header-includes:
   - \usepackage{amsbsy}
 output:
@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 Recall the standard optimization setting.

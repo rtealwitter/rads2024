@@ -50,7 +50,7 @@ Monday 1/22    | Singular Value Decomposition | [Notes](notes/14_singular_value_
 Tuesday 1/23   | Power Method | [Notes](notes/15_power_method.html) |  | </tr><tr>
 Wednesday 1/24 | Spectral Graph Theory | [Notes](notes/16_spectral_graph_theory.html) |  | </tr><tr>
 Thursday 1/25  | Sketched Regression | [Notes](notes/17_sketched_regression.html) |  | </tr><tr>
-Monday 1/29    | Fast Johnson-Lindenstrauss Transform | [Notes](notes/18_fast_jl_transform.html) |  | </tr><tr>
+Monday 1/29    | Fast JL Transform | [Notes](notes/18_fast_jl_transform.html) |  | </tr><tr>
 Tuesday 1/30   | Sparse Recovery | [Notes](notes/19_sparse_recovery.html) |  | </tr><tr>
 
 

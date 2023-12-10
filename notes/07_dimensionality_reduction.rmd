@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 Despite all the prior warning that low-dimensional space looks nothing like high-dimensional space,

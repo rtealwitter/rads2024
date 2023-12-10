@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
+    includes:
+      in_header: header.html
 ---
 
 The main idea of spectral graph theory is to understand graph data by constructing natural matrix representations and studying their spectrums.
