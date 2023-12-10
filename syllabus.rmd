@@ -5,20 +5,20 @@ output:
     css: styles.css
 ---
 
-**Course Description:** As data becomes ubiquitous and computing resources cheaper, many disciplines have turned to deep learning to solve complicated problems. While it has achieved remarkable success in a variety of "human" tasks, deep learning is often treated as a black-box. In this course, we will study deep learning from its foundations and build an intuitive understanding for why it works. Pairing lectures with labs, we will develop cutting-edge deep learning solutions to a variety of real-world problems. We will cover neural networks, convolutional networks designed for object detection, and recurrent networks used for natural language processing. We may also explore other topics including transformers, reinforcement learning, and generative adversarial networks subject to time and interest.
+**Course Description:** In this class, we will discover how data science techniques are deployed at scale. The questions we investigate will include: How do services such as Shazam recognize song clips in seconds? In settings with hundreds of features, how do we find patterns? Given a social network, how can we detect groups? And how can we use vibrations to "see" into the earth? We'll answer these questions and more by exploring how randomization lets us get away with far fewer resources than we'd otherwise need. Topics include random variables, concentration inequalities, dimensionality reduction, singular value decomposition, spectral graph theory, and approximate linear regression.
 
-**Prerequisites:** I will assume familiarity with linear algebra and calculus. In order to ensure we're on the same page, please review the Wikipedia articles on [matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication) and [gradients](https://en.wikipedia.org/wiki/Gradient). We will be coding in python and I will expect you to be familiar with it.
+**Prerequisites:** I will assume familiarity with linear algebra and algorithms. We will write some code in python and I expect you to be familiar with it.
 
-**Structure:** We will meet on Monday, Tuesday, Wednesday, and Thursday at 75 Shannon in Room 202. The lecture is from 10am to 12pm and the lab is from 2 to 3pm. I will hold my office hours directly after the lab.
+**Structure:** We will meet on Monday, Tuesday, Wednesday, and Thursday at 75 Shannon in Room 202. The lecture is from 10am to 12pm and the discussion is from 2 to 3pm. I will hold my office hours directly after the discussion.
 
-**Resources**: This class uses material from Chinmay Hegde's phenomenal graduate deep learning [class](https://chinmayhegde.github.io/dl-notes/) at NYU Tandon. For each class, I will post my handwritten notes, the python notebook for the demo, and the written material I used to prepare. If you would like an additional resource, I have heard the free online textbook [Dive into Deep Learning](http://d2l.ai/) is excellent.
+**Resources**: This class uses material from Chris Musco's phenomenal graduate Algorithmic Machine Learning and Data Science [class](https://www.chrismusco.com/amlds2023/) at NYU Tandon. For each class, I will post my handwritten notes, the python notebook for the demo, and the written material I used to prepare. 
 
 ### **Grading**
 
 Your grade in the class will be based on the number of points you earn.
 
 **Participation and Questions (14 points):**
-Since winter term classes are smaller, let's take advantage of the opportunity for more engagement. Unless you have a reasonable excuse (e.g. sickness, family emergency), I expect you to attend every lecture and demo. Whether you are able to attend or not, I expect you to fill out the form linked from the home page to receive credit for engagement (one point per day). Of course, if you are not able to attend in person, you should read the reading and run the demo.
+Since winter term classes are smaller, let's take advantage of the opportunity for more engagement. Unless you have a reasonable excuse (e.g. sickness, family emergency), I expect you to attend every lecture and discussion. Whether you are able to attend or not, I expect you to fill out the form linked from the home page to receive credit for engagement (one point per day). Of course, if you are not able to attend in person, you should read the reading before filling out the form.
 
 **Homeworks (56 points):**
 There will be one homework problem per class. In order to encourage engagement with the solutions, your homework grade will be based both on your solutions and your self-grade of your solutions.
@@ -32,10 +32,12 @@ You will submit your solutions to the homework problems via Canvas. Writing clea
 In order to encourage engagement with the solutions, you will reflect on what you did well in the homework and what you learned. You should submit the self-grade after comparing your answers to the solutions.
 
 **Project (30 points):**
-An exciting part of deep learning is its potential to solve complicated and "human" tasks. You will brainstorm and execute a project on a data set of your choice. Your project should be related to an architecture or task that we have covered in class but you will be expected to take it to the next level. You can complete your project as an individual or with a partner.
+The purpose of randomized algorithms is to solve problems more efficiently *in practice*.
+In order to *practice*, you will select a topic we cover in class and implement an algorithm we discussed on a data set of your choosing. You will write a report describing your results and what you learned. You will also give a presentation showcasing your code to the class. You can complete your project as an individual or with a partner.
 
 **Late Policy:**
-You have one day (24 hours) of no-questions-asked total "lateness." I will total your lateness at the end of the class and each day of lateness beyond your allowance will result in a 5 point drop in your grade.
+I expect all assignments to be turned in on time.
+If you are unable to turn in an assignment on time, you must email me before the assignment is due to request an extension.
 
 ### **Honor Code**
 Academic integrity is an important part of your learning experience. You are welcome to use online material and discuss problems with others but you must explicitly acknowledge the outside resources on the work you submit.

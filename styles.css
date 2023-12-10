@@ -1,6 +1,6 @@
 .navbar {
   color: #000000;
-  background-color: #008080;
+  background-color: #800080;
 }
 
 table, th, td {
@@ -9,7 +9,7 @@ table, th, td {
 } 
 
 tr:nth-child(even), th {
-  background-color: #E5F2F2;
+  background-color: #DFC5FE;
 }
 
 h1 {
