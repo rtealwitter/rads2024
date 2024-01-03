@@ -9,8 +9,6 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
-    includes:
-      in_header: header.html
 ---
 
 The Hadamard transform is closely related to the Discrete Fourier Transform $\mathbf{F} \in \mathbb{C}^{n \times n}$.
@@ -170,7 +168,7 @@ Setting $\mathbf{A}$ to contain $m=\left( \frac{k \log^2 k \log n}{\epsilon^2} \
 In spirit, the proof requires similar tools to analyze subsampled Hadamard transforms!
 Many brilliant mathematicians have worked on this problem including Guruswami, Bourgain, Veryshinin, and Tao.
 
-Amazing, we can actually prove a version of this result with slightly worse bound.
+Amazingly, we can actually prove a version of this result with only a slightly worse bound.
 We'll start with the observation
 that the $k$-sparse vectors $\mathbf{x}$ that can be written as $\mathbf{Ax}$ lie in a union of $k$-dimensional subspaces.
 
@@ -179,7 +177,43 @@ that the $k$-sparse vectors $\mathbf{x}$ that can be written as $\mathbf{Ax}$ li
 <img src="images/subspaces_image.png" width="200px">
 </p>
 
-**Theorem (from Subspace Embedding):**
+We'll use the following subspace embedding theorem that we proved previously.
+
+**Subspace Embedding Theorem**
+Let $\mathcal{U} \subset \mathbb{R}^n$ be a $k$-dimensional subspace.
+If $\mathbf{\Pi}$ is chosen from any distribution satisfying the distributional JL Lemma, then with probability $1-\delta$,
+$$
+(1-\epsilon) \| \mathbf{y} \|_2^2
+\leq \| \mathbf{\Pi} \mathbf{y} \|_2^2
+\leq (1+\epsilon) \| \mathbf{y} \|_2^2
+$$
+for all $\mathbf{y} \in \mathcal{U}$ as long as $m = O \left( \frac{k + \log(1/\delta)}{\epsilon^2} \right)$.
+
+We will use union bound to apply this theorem to a collection of linear subspaces.
+Let $\mathcal{S}_k = \{ \mathbf{x} \in \mathbb{R}^n : \|\mathbf{x}\|_0 \leq k \}$ be the set of all $k$-sparse vectors.
+We can write $\mathcal{S}_k$ as a union of disjoint $q$-dimensional subspaces $\mathcal{S}_k = \mathcal{U}_1 \cup \ldots \mathcal{U}_T$.
+The number of subspaces $T$ is the number of ways to choose $k$ coordinates from $n$ coordinates, which is $T = \binom{n}{k}$.
+Consider all $k$-sparse vectors $\mathbf{x} \in \mathbb{R}^n$.
+We can partition the set by which coordinates are non-zero.
+For one set of non-zero coordinates, we only need to preserve the basis vectors for that set of coordinates.
+Therefore $T$ is the number of ways to choose $q$ coordinates from $n$ coordinates, which is $T = \binom{n}{k}$.
+
+We'll apply union bound to all $T$ subspaces.
+In particular, we'll set $\delta' = \frac{\delta}{T}$ and apply the subspace embedding theorem with failure probability $\delta'$.
+It remains to analyze
+\begin{align*}
+\log(1/\delta') &= \log(1/\delta) + \log(T) \\
+&= \log(1/\delta) + \log \left( \frac{n!}{k!(n-k)!} \right) \\
+&\approx \log(1/\delta) + k \log \left( \frac{n}{k} \right).
+\end{align*}
+We won't prove the approximate equality but you can [check](https://en.wikipedia.org/wiki/Binomial_coefficient#Bounds_and_asymptotic_formulas) that
+\begin{align*}
+\left( \frac{n}{k} \right)^k \leq \binom{n}{k} \leq \left( \frac{en}{k} \right)^k.
+\end{align*}
+
+Then we have the following.
+
+**Theorem:**
 Let $\mathcal{U} \subset \mathbb{R}^n$ be a $k$-dimensional linear subspace.
 If $\mathbf{\Pi} \in \mathbb{R}^{m \times n}$ is chosen from any distribution $\mathcal{D}$ satisfying the distributional JL lemma, then with probability $1-\delta$,
 $$
@@ -187,26 +221,3 @@ $$
 $$
 for all $\mathbf{x} \in \mathcal{U}$ as long as
 $m = O\left( \frac{k\log(n) + \log(1/\delta)}{\epsilon^2} \right)$.
-
-**Proof:**
-We will prove the result by applying the subspace embedding theorem with $\delta' = \delta/\# \text{subspaces}$.
-Then, by union bound, we have that the result holds for all subspaces with probability $1-\delta$.
-There are $n \choose k$ possible $k$-dimensional subspaces.
-We can use the very loose bound that
-\begin{align*}
-\binom{n}{k}
-= \frac{n!}{k!(n-k)!}
-\leq n^k.
-\end{align*}
-We set $\delta' = \delta/n^k$ so
-\begin{align*}
-\log \left( \frac{1}{\delta'} \right)
-= \log \left( \frac1{\delta} \right)
-+ k \log \left( n \right).
-\end{align*}
-Applying the subspace embedding theorem gives that we need 
-\begin{align*}
-m = O\left( \frac{k + \log(1/\delta')}{\epsilon^2} \right)
-= O\left( \frac{k + k \log(n) + \log(1/\delta)}{\epsilon^2} \right).
-\end{align*}
-

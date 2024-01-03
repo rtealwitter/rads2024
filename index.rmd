@@ -15,13 +15,13 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   <div class="col-md-6" markdown="1">
   **Instructor**: [R. Teal Witter](https://www.rtealwitter.com/). Please call me Teal.
   
-  **Class Times**: We meet Monday, Tuesday, Wednesday, and Thursday in Room 202. The lecture is from 10am to noon and the discussion is from 2 to 3pm.
+  **Class Times**: We meet Monday, Tuesday, Wednesday, and Thursday in 75 Shannon St Room 202. The lecture is from 10am to noon and the discussion is from 2 to 3pm.
   
-  **Office Hours**: I will hold office hours in TBD from 3 to 4pm.
+  **Office Hours**: I will hold office hours in 75 Shannon St Room 221 from 3 to 4pm.
   
   **Participation**: I expect you to engage in class, ask questions, and make connections. So that I can get a sense of how you're doing, please fill out [this](https://forms.gle/XNaiZFexa1JGJtTs5) form once per lecture. (You will receive one point per lecture if you answer the form.)
   
-  **Discussion**: Please post all your course related questions on [Canvas](https://middlebury.instructure.com/courses/11668). If your question reveals your solution to a homework problem, please email me instead.
+  **Discussion**: Please post all your course related questions on [Canvas](https://middlebury.instructure.com/courses/13944). If your question reveals your solution to a homework problem, please email me instead.
   
   </div>
   <div class="col-md-6" markdown="1">
