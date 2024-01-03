@@ -37,7 +37,7 @@ while still returning an *approximately* correct result.
 
 We can run randomized algorithms in practice to see how well they work.
 But we also want to *prove* that they work and understand why.
-Today, we will solve two problems using randomized algorithms.
+Today, we will solve a problem using randomized algorithms.
 Before we get to the problems and algorithms, we'll build some helpful probability tools.
 
 ### Probability Background
@@ -194,19 +194,18 @@ is a scaler.
 **Fact 3:** When $X$ and $Y$ are independent, $\textrm{Var}(X+Y) = \textrm{Var}(X) + \textrm{Var}(Y)$.
 
 **Proof:** Observe that
+
+\begin{align*}
+\textrm{Var}(X+Y) &= \mathbb{E}\left[(X + Y - \mathbb{E}[X] - \mathbb{E}[Y])^2\right] \\
+&= \mathbb{E}\left[(X- \mathbb{E}[X])^2 + 2(X-\mathbb{E}[X])(Y-\mathbb{E}[Y]) + (Y-\mathbb{E})^2\right] \\
+&= \textrm{Var}(X) + 2\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])]+ \textrm{Var}(Y).
+\end{align*}
+Then, when $X$ and $Y$ are independent,
 $$
-\textrm{Var}(X+Y) = \mathbb{E}[(X-Y)^2] - \mathbb{E}[X-Y]^2
+\mathbb{E}[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])]
+= \mathbb{E}[XY - \mathbb{E}[X]Y - X\mathbb{E}[Y] + \mathbb{E}[X]\mathbb{E}[Y]] = 0
 $$
-$$
-= (\mathbb{E}[X^2] - 2\mathbb{E}[XY] + \mathbb{E}[Y^2]) - (\mathbb{E}[X]^2 -2\mathbb{E}[X] \mathbb{E}[Y] + \mathbb{E}[Y]^2)
-$$
-$$
-= \mathbb{E}[X^2] - \mathbb{E}[X]^2 + \mathbb{E}[Y^2] - \mathbb{E}[Y]^2 = \textrm{Var}(X) + \textrm{Var}(Y)
-$$
-where the first equality followed by definition,
-the second equality followed by foiling and linearity of
-expectation, and the third equality followed
-by **Fact 1**.
+where the last equality follows by Fact 1 when $X$ and $Y$ are independent.
 
 
 ## Set Size Estimation
