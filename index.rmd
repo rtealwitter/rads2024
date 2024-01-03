@@ -29,7 +29,7 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   
   Assignment | Work Due 
   :--- | :--- 
-  [Problem Set 1](psets/pset.pdf) ([LaTeX](psets/pset.tex)) | Friday 1/12 
+  [Problem Set 1](psets/pset1.pdf) ([LaTeX](psets/pset1.tex)) | Friday 1/12 
   </div>
 </div>
 
