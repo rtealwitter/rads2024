@@ -13,10 +13,10 @@ output:
       in_header: header.html
 ---
 
-We've seen saw the power of linearity of expectation, Markov's inequality, and the union bound.
+We've seen the power of linearity of expectation, Markov's inequality, and the union bound.
 This class, we will learn and use linearity of variance and Chebyshev's inequality.
 
-### Chebyshev's Inequality
+## Chebyshev's Inequality
 
 **Lemma:** Let $X$ be a random variable expectation $\mathbb{E}[X]$
 and variance $\sigma^2 = \textrm{Var}[X]$. Then for any $k > 0$,
@@ -57,7 +57,7 @@ $$
 \Pr\left(|X - \mathbb{E}[X]| \geq k \sigma\right) \leq \frac{1}{k^2}.
 $$
 
-### Linearity of Variance
+## Linearity of Variance
 In order to use Chebyshev's inequality, we need to bound the variance.
 Luckily, there's a helpful tool to help us compute the variance when we have a sum of independent random variables.
 
@@ -78,8 +78,8 @@ $$
 **Question:** Can you think of three random variables that are pairwise independent but not 3-wise independent?
 
 Here's one answer: Let $X_1$ be a random variable that is equally likely to be $1$ and $-1$, let $X_2$ be another random variable that is equally to be $1$ and $-1$, and let $X_3 = X_1 X_2$.
-With only two of the three, the random variables are independent.
-But, with all three of them, the third random variable is strongly correlated with the first two.
+If we only look at two of the random variables, they appear independent.
+But if we look at all three of them, the values of two give us the value of the third.
 
 ### Coin Example
 
@@ -115,7 +115,7 @@ In this model,
 we have a massive data set that arrives in a sequential stream. 
 There is far too much data to store or process in a single location
 but we still want to analyze the data.
-To do this, we must compress the data on the fly, storing some smaller data structure which still contains interesting information.
+To do this, we must compress the data on the fly, storing some smaller data structure which still contains useful information.
 
 The input to the distinct elements problem is $x_1, \ldots, x_n$ where each item is in a huge universe of items $\mathcal{U}$.
 The output is the number of *distinct* inputs $D$.
@@ -167,7 +167,7 @@ abstraction which makes understanding and analyzing algorithms easier.
 -->
 
 Why do we return the estimate $\hat{D} = \frac{1}{S}- 1$?
-Intuitively, when $D$ is larger $S$, will be smaller because
+Intuitively, when $D$ is larger, $S$ will be smaller because
 we get more chances to get small values.
 But the reason behind the exact estimate is that 
 
@@ -214,7 +214,7 @@ For any event $A$ and random variable $x$,
 	= \mathbb{E}[\mathbb{1}[A]]
 	= \Pr[A].
 \end{align}
-The first and last equality follow because $\mathbb{1}[A]$ is a indicator random variable for event $A$.
+The first and last equality follow because $\mathbb{1}[A]$ is an indicator random variable for event $A$.
 The middle equality follows by the [law of total expectation](https://en.wikipedia.org/wiki/Law_of_total_expectation).
 After a little bit of thought, the law of total expectation is intuitive.
 But you can prove it to yourself by plugging in the definition of expectations and exchanging sums/integrals, or you can find the proof online [here](https://en.wikipedia.org/wiki/Law_of_total_expectation#Informal_proof).
@@ -416,17 +416,13 @@ $$
 \leq \frac{1}{S} - 1 \leq (1+2\epsilon)
 \frac{1}{\mathbb{E}[S]} - 1.
 $$
-Now, since $\frac{1}{\mathbb{E}[S]} \leq 1$,
-we know that
-$\frac{1}{\mathbb{E}[S]} \leq 2 \left( \frac{1}{\mathbb{E}[S]} - 1 \right)$
-and so $2\epsilon \frac{1}{\mathbb{E}[S]}
-\leq 4 \epsilon \left( \frac{1}{\mathbb{E}[S]} - 1 \right)$.
-Then
+Then, for $\mathbb{E}[S] \leq \frac12$, we have
 $$
-(1-4 \epsilon)\left( \frac{1}{\mathbb{E}[S] - 1} \right)
+(1-4 \epsilon)\left( \frac{1}{\mathbb{E}[S]} - 1 \right)
 \leq \frac{1}{S} - 1 
 \leq (1+4\epsilon) \left( \frac{1}{\mathbb{E}[S]} - 1 \right).
 $$
+(You can check the inequalities by plotting [here](https://www.desmos.com/calculator/qwxy34rllc).)
 Since $D = \frac{1}{\mathbb{E}[S]} - 1$ and
 $\hat{D} = \frac{1}{S} - 1$, we have
 that with probability $\delta$,
