@@ -74,9 +74,9 @@ In your solution, include all relevant results and calculations in addition to a
 We showed that Count-Min can estimate the frequency of any item in a stream of $n$ items up to additive error $\frac{1}{m} n$ using $O(m)$ space. In practice it is often observed that this bound is pessimistic: the algorithm performs better than expected. In this problem, you will establish one reason why. 
 
 For any positive integer $m$, let $f_1, \ldots, f_{m}$ be the frequencies of the $m$ most frequent items in our stream. Let $C = n - \sum_{i=1}^{m} f_i$. In general, we can have that $C \ll n$. For example, it has been observed that up to $95\%$ of YouTube video views come from just $1\%$ of videos. 
-Prove that using $O(m)$ space,  Count-Min actually returns an estimate $\tilde{f}$ to $f(v)$ for any item $v$ satisfying:
+Prove that using $O(m)$ space,  Count-Min actually returns an estimate $\tilde{f}(v)$ to $f(v)$ for any item $v$ satisfying:
 \begin{align}\label{eq:improved_frequency_bound}
-	f(v) \leq \tilde{f} \leq f(v) + \frac{1}{m} C
+	f(v) \leq \tilde{f}(v) \leq f(v) + \frac{2}{m} C
 \end{align}
 with $9/10$ probability. This is strictly better than the $\frac{1}{m} n$ error bound shown in class. 
 
@@ -89,12 +89,24 @@ Then write the estimate $\tilde{f}(v) = A[h(v)]$ as the true frequency $f(v)$ an
 \subsection*{Part 2}
 Prove that the first error term is 0 with constant probability; that is, there is a constant probability that none of the $m$ most frequent items collide with $v$.
 
-Hint: Use one of these inequalities: $$\frac1{e} \geq (1-\frac1{m})^m \geq \frac{1}{2e}.$$ You can check these inequalities for yourself on \href{https://www.desmos.com/calculator/bok5upfowo}{Desmos}.
+Hint: Use one of these inequalities: $$\frac1{e} \geq \left(1-\frac1{m}\right)^m \geq \frac{1}{2e}.$$ You can check these inequalities for yourself on \href{https://www.desmos.com/calculator/bok5upfowo}{Desmos}.
 
 Following the analysis in class, prove that the second error term is at most $\frac{2}{m}C$ with constant probability.
 
 Show how both results together imply that Equation \ref{eq:improved_frequency_bound} holds with a constant probability.
 
 %\input{solutions/solution1_2}
+
+\section*{Problem 3 (from January 9)}
+
+One of the most important factors in controlling diseases like COVID-19 is testing. Before at-home kits became available, testing was expensive and slow. One way to make it cheaper was to test patients in \emph{groups}. The biological samples from multiple patients (e.g., multiple nose swabs) are combined into a single test tube and tested for COVID-19 all at once. If the test comes back negative, we know everyone in the group is negative. If the test comes back positive, we do not know which patients in the group actually had COVID-19, so further testing would be necessary. There's a trade-off here, but it turns out that, overall, group testing can save on the total number of tests run. 
+
+\subsection*{Part 1}
+Consider the following deterministic ``two-level'' testing scheme. We divide a population of $n$ individuals to be tested into $C$ groups of the same size. We then test each of these groups. For any group that comes back positive, we retest all members of the group individually. Show that there is a choice for $C$ such that, if $k$ individuals in the population have COVID-19, we can find all of those individuals with $\leq 2\sqrt{nk}$ tests. You can assume $k$ is known in advance (often it can be estimated accurately from the positive rate of prior tests). This is already an improvement on the naive $n$ tests when $k < 25\% \cdot n$.
+	
+\subsection*{Part 2}
+We can use randomness to do better. Consider the following scheme: Collect $q = \log_2 (10n)$ nose swabs from each individual (I know... not pleasant). Then, repeat the following process $q$ times: randomly partition our set of $n$ individuals into $C=2k$ groups, and test each group in aggregate. Once this process is complete, report that an individual ``has COVID'' if the group they were part of tested positive all $q$ times. Report that an individual ``is clear'' if \emph{any} of the groups they were part of tested negative. Show that, with probability $9/10$, this scheme finds all truly positive patients and reports no false positives. Thus, we only require $2k * \log_2(10n) = O(k\log n)$ tests!
+
+%\input{solutions/solution1_3}
 
 \end{document}
