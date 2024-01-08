@@ -39,7 +39,7 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
 Class | Topic | Notes | Slides </tr><tr>
 :--- | :--- | :--- | :--- |
 Thursday 1/4   | Set Size Estimation | [Notes](notes/01_set_size.html) | [Slides](lectures/lecture01.pdf)  | </tr><tr>
-Monday 1/8     | Frequent Items | [Notes](notes/02_frequent_items.html) |  | </tr><tr>
+Monday 1/8     | Frequent Items | [Notes](notes/02_frequent_items.html) | [Slides](lectures/lecture02.pdf) | </tr><tr>
 Tuesday 1/9    | Distinct Elements| [Notes](notes/03_distinct_elements.html) |  | </tr><tr>
 Wednesday 1/10 | Load Balancing | [Notes](notes/04_load_balancing.html) |  | </tr><tr>
 Thursday 1/11  | Concentration Inequalities | [Notes](notes/05_concentration_inequalities.html) |  | </tr><tr>
