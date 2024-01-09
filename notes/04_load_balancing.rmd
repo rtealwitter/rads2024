@@ -1,5 +1,5 @@
 ---
-title: "**Distinct Elements**"
+title: "**Load Balancing**"
 header-includes:
   - \usepackage{amsbsy}
 output:
@@ -13,10 +13,10 @@ output:
       in_header: header.html
 ---
 
+## Load Balancing
+
 We've seen how to apply linearity of variance and Chebyshev's inequality to the distinct elements problem.
 In this class, we will see how to apply these tools to the load balancing problem.
-
-This class, we will learn and use linearity of variance and Chebyshev's inequality.
 
 Suppose Google answers map search queries using $n$ servers
 $A_1, \ldots, A_n$.
@@ -35,13 +35,15 @@ Well, if a query has already been answered on a server, we want to direct
 the same query to it again so we don't have to recompute the same answer
 on different servers.
 
+### Problem Statement
+
 Suppose we have $n$ servers and $m$ requests
 $x_1, \ldots, x_m$.
 Let $s_i$ be the number of requests sent to 
 server $i \in \{1, \ldots, n\}$.
 Formally,
 $$
-s_i = \sum_{j=1}^m \mathbb{1}[h(x_j)=1].
+s_i = \sum_{j=1}^m \mathbb{1}[h(x_j)=i].
 $$
 Our goal is to understand the value of the maximum load on any server,
 which can be written as the random variable
@@ -103,9 +105,9 @@ and dependent dynamics.
 
 ### Union Bound
 
-**Union Bound:** For any events $A_1, \ldots, A_n$,
+**Union Bound:** For any events $E_1, \ldots, E_n$,
 $$
-\Pr(A_1 \cup \ldots \cup A_n) \leq \Pr(A_1) + \ldots + \Pr(A_n).
+\Pr(E_1 \cup \ldots \cup E_n) \leq \Pr(E_1) + \ldots + \Pr(E_n).
 $$
 
 <center><img src="images/union.png" width="600"></center>
@@ -115,19 +117,20 @@ This time, we'll prove the union bound using Markov's inequality.
 Ironically, three of the tools that we've used so far (Markov's inequality, Chebyshev's inequality, and the union bound) are all Markov's inequality.
 
 **Proof**:
-Let $X_i = \mathbb{1}[A_i]$ be the indicator random variable
-that event $A_i$ occurs.
-Define $S= \sum_{i=1}^n X_i$ as the number of events that occur.
+Let $\mathbb{1}[E_i]$ be the indicator random variable that event $E_i$ occurs.
+Define $X= \sum_{i=1}^n \mathbb{1}[E_i]$ as the number of events that occur.
 Markov's inequality tells us that
 $$
-\Pr \left( A_1 \cup \ldots \cup A_n \right)
-= \Pr \left( \sum_{i=1}^n X_i \geq 1 \right)
-\leq \mathbb{E}[S]
+\Pr \left( E_1 \cup \ldots \cup E_n \right)
+= \Pr \left( \sum_{i=1}^n \mathbb{1}[E_i] \geq 1 \right)
+\leq \mathbb{E}[X]
 $$
 $$
-= \sum_{i=1}^n \mathbb{E}[X_i]
-= \Pr(A_1) + \ldots + \Pr(A_n).
+= \sum_{i=1}^n \mathbb{E}[\mathbb{1}[E_i]]
+= \Pr(E_1) + \ldots + \Pr(E_n).
 $$
+
+### Analysis
 
 If we can prove that $\Pr(s_i \geq C) \leq \frac{1}{10n}$,
 then the union bound immediately gives the last two bounds that
@@ -155,7 +158,7 @@ Since each $s_{i,j}$ and $s_{i,j'}$ are independent, we can apply
 linearity of variance and get
 $$
 \textrm{Var}(s_i)
-=\sum_{j=1}^n \textrm{Var}(s_i,j).
+=\sum_{j=1}^n \textrm{Var}(s_{i,j}).
 $$
 We know that server $i$ gets request $j$ with probability $\frac{1}{n}$
 so $s_i = 1$ with probability $\frac{1}{n}$ and $s_i=0$ otherwise.
@@ -199,11 +202,8 @@ $n$ servers, the server with the maximum number of requests
 contains no more than $\sqrt{10n} + 1$ requests with probability
 $\frac{9}{10}$.
 
-## Conclusion
-
-In this class, we analyzed and solved the distinct elements problem and the load balancing problem.
-Both are important and widely applicable.
-But the real value of what we did today is not the specific problems we solved but the techniques we used to solve them:
+We analyzed and solved the load balancing problem which is important and widely applicable.
+But the real value of what we did today is not the specific problem we solved but the techniques we used to solve them:
 
 * We used the union bound to control the maximum of many random variables.
 
