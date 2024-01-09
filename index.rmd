@@ -25,7 +25,7 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   
   </div>
   <div class="col-md-6" markdown="1">
-  **Assignments**: I will give you one problem per class. I expect you to solve the problem with your group during the discussion (I'll be there to answer questions). Once you have solved the problem, you should write up your solution on your own. In addition, there will be a project on a lecture topic of your choice.
+  **Assignments**: You will receive one problem per class. I expect you to solve the problem with your group during the discussion (I'll be there to answer questions). Once you have solved the problem, you should write up your solution on your own. In addition, there will be a project on a lecture topic of your choice.
   
   Assignment | Work Due 
   :--- | :--- 
