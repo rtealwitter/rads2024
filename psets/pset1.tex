@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{amsmath, amsfonts}
-\usepackage{hyperref,bbm}
+\usepackage{hyperref,bbm, graphicx}
 
 
 \title{CSCI 1052 Problem Set 1}
@@ -108,5 +108,26 @@ Consider the following deterministic ``two-level'' testing scheme. We divide a p
 We can use randomness to do better. Consider the following scheme: Collect $q = \log_2 (10n)$ nose swabs from each individual (I know... not pleasant). Then, repeat the following process $q$ times: randomly partition our set of $n$ individuals into $C=2k$ groups, and test each group in aggregate. Once this process is complete, report that an individual ``has COVID'' if the group they were part of tested positive all $q$ times. Report that an individual ``is clear'' if \emph{any} of the groups they were part of tested negative. Show that, with probability $9/10$, this scheme finds all truly positive patients and reports no false positives. Thus, we only require $2k * \log_2(10n) = O(k\log n)$ tests!
 
 %\input{solutions/solution1_3}
+
+\section*{Problem 3 (from January 10)}
+
+In modern systems, hashing is often used to distribute data items or computational tasks to a collection of servers. What happens when a server is added or removed from a system? Most hash functions, including those discussed in class, are tailored to the number of servers, $n$, and would change completely if $n$ changes. This would require rehashing and moving all of our $m$ data items, an expensive operation.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{graphics/consistentHashing.png}
+	\caption{Each data item is stored on the server with matching color.}
+\end{figure}
+
+Here we consider an approach to avoid this problem. Assume we have access to a completely random hash function that maps any value $x$ to a real value $h(x) \in [0,1]$. Use the hash function to map \emph{both} data items and servers randomly to $[0,1]$. Each data item is stored on the first server to its right on the number line (with wrap around -- i.e. a job hashed below 1 but above all serves is assigned to the first server after 0). When a new server is added to the system, we hash it to $[0,1]$ and move data items accordingly.
+
+\subsection*{Part 1}
+Suppose we have $n$ servers initially. When a new server is added to the system, what is the expected number of data items that need to be relocated? 
+	
+\subsection*{Part 2}
+Show that, with probability $>9/10$, no server ``owns'' more than an $$\frac{\log_e (10 n)}{n}$$ fraction of the interval $[0,1]$. 
+\textbf{Hint:} This can be proven \underline{without} a concentration bound.
+
+%\input{solutions/solution1_4}
 
 \end{document}
