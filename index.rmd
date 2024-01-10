@@ -42,7 +42,7 @@ Thursday 1/4   | Set Size Estimation | [Notes](notes/01_set_size.html) | [Slides
 Monday 1/8     | Frequent Items | [Notes](notes/02_frequent_items.html) | [Slides](lectures/lecture02.pdf) | </tr><tr>
 Tuesday 1/9    | Distinct Elements| [Notes](notes/03_distinct_elements.html) | [Slides](lectures/lecture03.pdf) | </tr><tr>
 Wednesday 1/10 | Load Balancing | [Notes](notes/04_load_balancing.html) | [Slides](lectures/lecture04.pdf) | </tr><tr>
-Thursday 1/11  | Concentration Inequalities | [Notes](notes/05_concentration_inequalities.html) |  | </tr><tr>
+Thursday 1/11  | Concentration Inequalities | [Notes](notes/05_concentration_inequalities.html) | [Slides](lectures/lecture05.pdf) | </tr><tr>
 Tuesday 1/16   | High-Dimensional Geometry | [Notes](notes/06_high_dimensional_geometry.html) |  | </tr><tr>
 Wednesday 1/17 | Dimensionality Reduction | [Notes](notes/07_dimensionality_reduction.html) |  | </tr><tr>
 Thursday 1/18  | Similarity Estimation | [Notes](notes/08_similarity_estimation.html) |  | </tr><tr>

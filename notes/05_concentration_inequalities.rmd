@@ -313,18 +313,19 @@ We upper bound the probability to avoid the addition in the denominator of the e
 Doing this, we get
 $$
 \exp\left(\frac{-\epsilon^2}{2+\epsilon}\right) 
-\leq \exp\left(\frac{-\epsilon^2}{3}\right) \leq \frac{1}{10n}
+\leq \exp\left(\frac{-\epsilon^2}{2\epsilon}\right) \leq \frac{1}{10n}
 $$
+as long as $\epsilon \geq 2$. Then
 $$
 \Leftrightarrow
--\frac{1}{3}\epsilon^2 \leq \log \frac{1}{10n}
+-\frac{1}{2}\epsilon \leq \log \frac{1}{10n}
 \Leftrightarrow
-\epsilon \geq \sqrt{3 \log(10n)}.
+\epsilon \geq 2 \log(10n).
 $$
 Plugging in this choice of $\epsilon$,
 we have
 $$
-\Pr(S \geq 1 + \sqrt{3 \log(10n)})
+\Pr(S \geq 1 + 2 \log(10n))
 \leq \frac{1}{10n}.
 $$
 
