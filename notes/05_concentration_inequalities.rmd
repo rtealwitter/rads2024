@@ -31,7 +31,7 @@ So, if you squint, we just used Markov's inequality twice.
 Today, we'll prove a stronger result that the server with the maximum load has $O(\log n)$ requests with high probability.
 For this result, we'll need a stronger concentration inquality than Chebyshev's.
 
-### Improving Chebyshev's Inequality
+## Improving Chebyshev's Inequality
 
 We'll see that Chebyshev's inequality is accurate for *some* random variables.
 But, for many other random variables, the inequality is loose.
@@ -161,7 +161,7 @@ $$
 \leq \exp\left(\frac{-\epsilon^2 \mu}{2}\right).
 $$
 
-Notice that the first inequality gives an upper bound on the pobability that $S$ exceeds is expectation by a factor of $1+\epsilon$ while the second inequality gives an upper bund on the probability that $S$ falls below its expectation by a factor of $1-\epsilon$.
+Notice that the first inequality gives an upper bound on the pobability that $S$ exceeds is expectation by a factor of $1+\epsilon$ while the second inequality gives an upper bound on the probability that $S$ falls below its expectation by a factor of $1-\epsilon$.
 
 Using union bound, we can combine them into a single inequality.
 
@@ -304,7 +304,7 @@ Since the probability job $j$ goes to server $i$ is $\frac{1}{n}$,
 we have $\mathbb{E}[X_j] = \frac{1}{n}$ and so $\mathbb{E}[S_i] = \sum_{j=1}^n \frac{1}{n} = 1$.
 Recall the first Chernoff bound tells us that
 $$
-\Pr(S \geq 1+\epsilon)
+\Pr(S_i \geq 1+\epsilon)
 \leq \exp\left(\frac{-\epsilon^2}{2+\epsilon}\right)
 $$
 where we plugged in $\mu=1$.
@@ -313,22 +313,19 @@ We upper bound the probability to avoid the addition in the denominator of the e
 Doing this, we get
 $$
 \exp\left(\frac{-\epsilon^2}{2+\epsilon}\right) 
-\leq \exp\left(\frac{-\epsilon^2}{2\epsilon}\right) \leq \frac{1}{10n}
+\leq \exp\left(\frac{-\epsilon^2}{3}\right) \leq \frac{1}{10n}
 $$
 $$
 \Leftrightarrow
--\frac{1}{2}\epsilon \leq \log \frac{1}{10n}
+-\frac{1}{3}\epsilon^2 \leq \log \frac{1}{10n}
 \Leftrightarrow
-\epsilon \geq 2 \log(10n).
+\epsilon \geq \sqrt{3 \log(10n)}.
 $$
 Plugging in this choice of $\epsilon$,
 we have
 $$
-\Pr(S \geq 1 + 2 \log(10n))
-\leq \exp\left(\frac{-4 \log^2(10n)}{2 + 2 \log(10n)}\right)
-$$
-$$
-\leq \exp\left(-\log(10n)\right) = \frac{1}{10n}.
+\Pr(S \geq 1 + \sqrt{3 \log(10n)})
+\leq \frac{1}{10n}.
 $$
 
 So the server with the maximum load has at most $O(\log n)$ jobs with high probability.
@@ -463,7 +460,7 @@ In general, we need $O(n)$ tries to find an $n$-bit prime number.
 
 In the remainder of the class, we'll discuss a simple but important application of prime numbers to hashing.
 
-### Fingerprinting
+### Algorithm
 
 Our goal is to construct a compact "fingerprint" $h(f)$ for any given file $f$ with two properties:
 
