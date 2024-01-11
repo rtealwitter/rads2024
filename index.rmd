@@ -27,9 +27,9 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   <div class="col-md-6" markdown="1">
   **Assignments**: You will receive one problem per class. I expect you to solve the problem with your group during the discussion (I'll be there to answer questions). Once you have solved the problem, you should write up your solution on your own. In addition, there will be a project on a lecture topic of your choice.
   
-  Assignment | Work Due 
-  :--- | :--- 
-  [Problem Set 1](psets/pset1.pdf) ([LaTeX](psets/pset1.tex)) | Friday 1/12 
+  Assignment | Work Due | Self-grade Due
+  :--- | :--- | :---
+  [Problem Set 1](psets/pset1.pdf) ([LaTeX](psets/pset1.tex)) | Friday 1/12 | Monday 1/15
   </div>
 </div>
 
