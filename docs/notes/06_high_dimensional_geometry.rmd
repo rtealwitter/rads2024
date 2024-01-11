@@ -16,7 +16,7 @@ output:
 A unifying theme of this course is how we deal with data in high dimensions.
 We'll see how to use:
 
-* Locality sensitive hasing to find similar items in high dimensions.
+* Locality sensitive hashing to find similar items in high dimensions.
 
 * Iterative methods for optimizing function that depend on many variables.
 
@@ -68,13 +68,13 @@ One example of such a set of vectors is the standard basis vectors: $\mathbf{x}_
 
 We can also see that $d$ is the largest possible size of such a set by contradiction.
 Suppose we have a set of more than $d$ orthogonal unit vectors.
-Then, we can write
+Since we have $d$ orthogonal vectors in $d$ dimensions, we know that they span the entire space.
+Then, we can write the $d+1$th vector as
 \begin{align}
 \mathbf{x}_{d+1} = \sum_{i=1}^d \alpha_i \mathbf{x}_i
 \end{align}
-for some coefficients $\alpha_i$.
-Since we have $d$ orthogonal vectors in $d$ dimensions, we know that they span the entire space.
-This means that we can write $\mathbf{x}_{d+1}$ as the span of the first $d$ vectors; that is, there is some $j$ such that $\alpha_j \neq 0$.
+for some coefficients $\alpha_i$ where there is at least one $j$ such that $\alpha_j \neq 0$.
+In words, we can write $\mathbf{x}_{d+1}$ as the span of the first $d$ vectors.
 Taking the inner product of both sides with $\mathbf{x}_j$ gives
 \begin{align}
 \langle \mathbf{x}_{d+1}, \mathbf{x}_j \rangle
@@ -124,7 +124,7 @@ The first equality is by linearity of variance.
 The third equality is because $x_i[k]^2 = \frac1{d}$. 
 
 Define a random variable $Z = \mathbf{x}_i^\top \mathbf{x}_j
-= \sum_{k=1}^d C_i$ where each $C_i$ is $\frac1{d}$ or $-\frac1{d}$ with equal probability.
+= \sum_{k=1}^d C_k$ where each $C_k$ is $\frac1{d}$ or $-\frac1{d}$ with equal probability.
 Since $Z$ is a sum of many i.i.d. random variables, we expect $Z$ to approximate a Gaussian.
 If $Z$ *were* a Gaussian, then
 \begin{align}
@@ -139,7 +139,7 @@ We'd like to apply Chernoff's bound.
 However, Chernoff's bound requires that the random variable be binary.
 With some clever algebra, we can write $Z$ as a sum of binary random variables.
 \begin{align}
-Z &= \sum_{k=1}^d C_i = \frac2{d} \sum_{k=1}^d \frac{d}{2} C_k \\
+Z &= \sum_{k=1}^d C_k = \frac2{d} \sum_{k=1}^d \frac{d}{2} C_k \\
 &= \frac2{d} \sum_{k=1}^d \left( -\frac1{2} + B_k \right) \\
 &= \frac2{d} \left( - \frac{d}{2} + \sum_{k=1}^d B_k \right).
 \end{align}
@@ -152,7 +152,7 @@ With our expression for $Z$, this is equivalent to
 \begin{align}
 \sum_{k=1}^d B_k > \frac{d}{2} + \frac{d}{2} \epsilon.
 \end{align}
-Similarly, the event that $Z < \epsilon$ is equivalent to
+Similarly, the event that $Z < -\epsilon$ is equivalent to
 \begin{align}
 \sum_{k=1}^d B_k < \frac{d}{2} - \frac{d}{2} \epsilon.
 \end{align}
@@ -309,7 +309,7 @@ The second equality is because each entry has mean 0 and variance 1.
 We will use the following inequality:
 \begin{align}
 \Pr \left(
-\| \mathbf{g} \|_2^2 \leq \frac{d}{2} ]
+\| \mathbf{g} \|_2^2 \leq \frac{d}{2}
 \right)
 \leq \frac{1}{2^{c d}}
 \end{align}
