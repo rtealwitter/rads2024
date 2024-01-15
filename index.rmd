@@ -30,6 +30,8 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   Assignment | Work Due | Self-grade Due
   :--- | :--- | :---
   [Problem Set 1](psets/pset1.pdf) ([LaTeX](psets/pset1.tex)) | Friday 1/12 | Monday 1/15
+  [Problem Set 2](psets/pset2.pdf) ([LaTeX](psets/pset2.tex)) | Friday 1/19 | Monday 1/22
+  [Project Proposal](project/proposal.pdf) ([LaTeX](project/proposal.tex)) | Monday 1/22 |
   </div>
 </div>
 
@@ -43,7 +45,7 @@ Monday 1/8     | Frequent Items | [Notes](notes/02_frequent_items.html) | [Slide
 Tuesday 1/9    | Distinct Elements| [Notes](notes/03_distinct_elements.html) | [Slides](lectures/lecture03.pdf) | </tr><tr>
 Wednesday 1/10 | Load Balancing | [Notes](notes/04_load_balancing.html) | [Slides](lectures/lecture04.pdf) | </tr><tr>
 Thursday 1/11  | Concentration Inequalities | [Notes](notes/05_concentration_inequalities.html) | [Slides](lectures/lecture05.pdf) | </tr><tr>
-Tuesday 1/16   | High-Dimensional Geometry | [Notes](notes/06_high_dimensional_geometry.html) |  | </tr><tr>
+Tuesday 1/16   | High-Dimensional Geometry | [Notes](notes/06_high_dimensional_geometry.html) | [Slides](lectures/lecture06.pdf) | </tr><tr>
 Wednesday 1/17 | Dimensionality Reduction | [Notes](notes/07_dimensionality_reduction.html) |  | </tr><tr>
 Thursday 1/18  | Similarity Estimation | [Notes](notes/08_similarity_estimation.html) |  | </tr><tr>
 Monday 1/22    | Singular Value Decomposition | [Notes](notes/14_singular_value_decomposition.html) |  | </tr><tr>

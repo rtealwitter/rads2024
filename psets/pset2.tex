@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath, amsfonts}
+\usepackage{hyperref, graphicx}
+
+
+\title{CSCI 1052 Problem Set 2}
+\author{} % TODO: Put your name here
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Submission Instructions}
+
+Please upload your solutions by
+\textbf{5pm Friday January 19, 2024.}
+\begin{itemize}
+\item You are encouraged to discuss ideas
+and work with your classmates. However, you
+\textbf{must acknowledge} your collaborators
+at the top of each solution on which
+you collaborated with others 
+and you \textbf{must write} your solutions and code
+independently.
+\item Your solutions to theory questions must
+be typeset in LaTeX or markdown.
+I strongly recommend uploading the source LaTeX (found 
+\href{https://www.rtealwitter.com/rads2024/psets/pset2.tex}{here})
+to Overleaf for editing.
+\item I recommend that you write your solutions to coding question in a Jupyter notebook using Google Colab.
+\item You should submit your solutions as a \textbf{single PDF} via the assignment on Gradescope. You can enroll in the class using the code GPXX7N.
+\item Once you uploaded your solution, \textbf{mark where you answered each part of each question}.
+\end{itemize}
+
+\newpage
+
+\section*{Problem 1: Normal Distribution from Darts}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{graphics/dartboard.jpeg}
+	\caption{A dartboard. Intuitively, the likelihood that a dart hits a particular point should only depend on the distance to the center and rotating the dartboard shouldn't change where darts likely land.}
+\end{figure}
+
+In this problem, we will derive the density function of the normal distribution from the example of a dartboard.
+Let $f: \mathbb{R}^d \to [0,1]$ be a probability density function that describes the probability a dart lands at the point $(x,y)$.
+We want our probability density function $f$ to have two properties:
+\begin{enumerate}
+    \item \textbf{Radial symmetry:} The probability that a dart lands at a point depends only on the distance between the point and the origin.
+    \item \textbf{Independence:} Coordinates are independent e.g., knowing the $x$-coordinate does not give us information about the $y$-coordinate.
+\end{enumerate}
+
+From the radial symmetry property, we can conclude that
+\begin{align}\label{eq:radial_symmetry}
+f(x,y) = f(r) = f(\sqrt{x^2 + y^2})
+\end{align}
+where $r=\sqrt{x^2+y^2}$ is the distance between the origin and $(x,y)$.
+
+From the independence property, we can conclude that $f(x,y) = g(x) h(y)$ for some functions $g$ and $h$.
+Further, the radial symmetry property tells us that $f(x,y) = f(y,x) = g(y) h(x)$ so $g$ and $h$ must be the same function.
+That is,
+\begin{align}\label{eq:independence}
+f(x,y) = g(x) g(y).
+\end{align}
+
+\subsection*{Part 1 (.5 points)} 
+
+Up to rescaling, we can assume that $g(0)=1$.
+Use this fact and plug in the point $(r,0)$ to conclude that $f$ and $g$ are the same function.
+
+\subsection*{Part 2 (.5 points)}
+
+Define the function $h(x) = f(\sqrt{x})$.
+In particular,
+\begin{align}\label{eq:define_h}
+f(\sqrt{x^2 + y^2}) = f(x) f(y) \Leftrightarrow
+h(x^2 + y^2) = h(x^2) + h(y^2).
+\end{align}
+Use this property to show that
+\begin{align}\label{eq:h_linear}
+h(x_1 + x_2 + \ldots + x_n) = h(x_1) + h(x_2) + \ldots + h(x_n).
+\end{align}
+Then prove that $h(n) = h(1)^n$.
+
+Without loss of generality, let $h(1) = b$.
+
+\subsection*{Part 3 (1 point)}
+
+Let $p$ and $q$ be any integers.
+Prove that 
+\begin{align}\label{eq:to_prove}
+h\left(\frac{p}{q}\right) = b^{\frac{p}{q}}.
+\end{align}
+
+\textbf{Hint:} Consider the expression
+\begin{align*}
+h\left(\frac{p}{q} \cdot q \right).
+\end{align*}
+
+As long as $h$ is continuous, conclude that $h(x) = b^x$ for any real number since the rational numbers are dense in the real number line.
+
+\subsection*{Part 4 (1 point)}
+
+You have shown that $h(x) = b^x$. Further, $h(x) = e^{cx}$ for some real number $c$.
+Then $f(x) = h(x^2) = e^{c x^2}$.
+Recall this implies the density function of $x$ and $y$ is $f(x,y) = f(x) f(y) = e^{c (x^2 + y^2)}$.
+
+For $f$ to be a valid probability density function, what constraint do we have on $c$?
+If we wanted to make the distribution more concentrated, how should we change $c$?
+
+Except for the normalization, we have explained every part of the multivariate normal distribution given below
+\begin{align*}
+f(x,y) = \frac1{\sigma \cdot 2 \pi} \exp\left(-\frac{x^2 + y^2}{2\sigma^2}\right).
+\end{align*}
+Why is there a normalization?
+
+%\input{solutions/solution2_1.tex}
+
+\end{document}
