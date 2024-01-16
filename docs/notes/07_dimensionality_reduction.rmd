@@ -249,7 +249,7 @@ Z_i \sim \mathcal{N}(0, \|\mathbf{x}\|_2^2).
 \end{align*}
 Then we can write
 \begin{align*}
-\mathbb{E}\left[ \mathbf{\Pi} \mathbf{x} \|_2^2 \right]
+\mathbb{E}\left[ \| \mathbf{\Pi} \mathbf{x} \|_2^2 \right]
 = \frac1{k} \sum_{i=1}^k \mathbb{E}[Z_i^2]
 = \frac1{k} \sum_{i=1}^k \| \mathbf{x} \|_2^2
 = \| \mathbf{x} \|_2^2.
@@ -268,7 +268,7 @@ Then
 
 In our case,
 \begin{align*}
-Z = \mathbf{\Pi x} 
+\mathbb{E}[Z] = \mathbb{E}[\mathbf{\Pi x}]
 = \frac1{k} \sum_{i=1}^k \mathbb{E}[\langle \pi_i,\mathbf{x} \rangle ]
 = \frac1{k} \sum_{i=1}^k Z_i^2.
 \end{align*}
