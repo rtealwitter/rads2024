@@ -113,10 +113,54 @@ If we wanted to make the distribution more concentrated, how should we change $c
 
 Except for the normalization, we have explained every part of the multivariate normal distribution given below
 \begin{align*}
-f(x,y) = \frac1{\sigma \cdot 2 \pi} \exp\left(-\frac{x^2 + y^2}{2\sigma^2}\right).
+f(x,y) = \frac1{\sigma^2 \cdot 2 \pi} \exp\left(-\frac{x^2 + y^2}{2\sigma^2}\right).
 \end{align*}
 Why is there a normalization?
 
 %\input{solutions/solution2_1.tex}
+
+\newpage
+
+\section*{Problem 2: Johnson-Lindenstrauss for Join Size Estimations}
+
+In class, we showed the Johnson-Lindenstrauss Lemma for preserving the norm of differences.
+Consider vectors $\mathbf{x}_1, \ldots, \mathbf{x}_n \in \mathbb{R}^d$.
+Let $k = O\left( \frac{\log n}{\epsilon^2} \right)$.
+We showed that a random matrix $\mathbf{\Pi} \in \mathbb{R}^{k \times d}$ satisfies
+\begin{align}
+(1-\epsilon) \| \mathbf{x}_i - \mathbf{x}_j \|_2^2
+\leq \| \mathbf{\Pi x}_i - \mathbf{\Pi x}_j \|_2^2
+\leq (1+\epsilon) \| \mathbf{x}_i - \mathbf{x}_j \|_2^2
+\end{align}
+with probability 9/10.
+
+\subsection*{Part 1}
+Show that we can use the Johnson-Lindenstrauss Lemma as stated above to show that inner-products are also preserved.
+In particular, under the same conditions as above,
+\begin{align}
+|
+\langle \mathbf{x}_i, \mathbf{x}_j \rangle
+- \langle \mathbf{\Pi x}_i, \mathbf{\Pi x}_j \rangle
+|
+\leq \frac12 \epsilon (\|\mathbf{x}_i\|_2^2 + \|\mathbf{x}_j\|_2^2)
+\end{align}
+with probability 9/10.
+
+\paragraph{Hint 1:} Show that $\| \mathbf{x}_i - \mathbf{x}_j \|_2^2 = \| \mathbf{x}_i \|_2^2 - 2 \langle \mathbf{x}_i, \mathbf{x}_j \rangle + \| \mathbf{x}_j \|_2^2$.
+
+\paragraph{Hint 2:} Apply the Johnson-Lindenstrauss Lemma to the term $\| \mathbf{x}_i + \mathbf{x}_j \|_2^2 - \| \mathbf{x}_i - \mathbf{x}_j \|_2^2$.
+
+\subsection*{Part 2}
+One powerful application of sketching is in database applications. For example, a common goal is to estimate the \emph{inner join size} of two tables without performing an actual inner join (which is expensive, as it requires enumerating the keys of the tables).
+Formally, consider two sets of unique keys $X = \{x_1, \ldots, x_m\}$ and $Y = \{y_1, \ldots, y_n\}$ which are subsets of $1,2, \ldots, U$. 
+Our goal is to estimate $|X\cap Y|$ based on small space compressions of $X$ and $Y$.  
+
+Using your result from Part 1, describe a method based on inner product estimation that constructs independent sketches of $X$ and $Y$ of size  $k = O\left(\frac{\log n}{\epsilon^2}\right)$ and from these sketches can return an estimate $Z$ for $|X\cap Y|$ satisfying
+\begin{align*}
+	\left|Z - |X\cap Y|\right| \leq \epsilon (|X|+|Y|)
+\end{align*}
+with probability $9/10$.
+
+%\input{solutions/solution2_2.tex}
 
 \end{document}

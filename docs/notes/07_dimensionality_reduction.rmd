@@ -27,8 +27,9 @@ There exists a linear map $\mathbf{\Pi}: \mathbb{R}^d \rightarrow \mathbb{R}^k$ 
 \begin{align}
 (1-\epsilon) \|\mathbf{q}_i - \mathbf{q}_j\|_2 
 \leq \|\mathbf{\Pi} \mathbf{q}_i - \mathbf{\Pi} \mathbf{q}_j\|_2 
-\leq (1+\epsilon) \|\mathbf{q}_i - \mathbf{q}_j\|_2.
+\leq (1+\epsilon) \|\mathbf{q}_i - \mathbf{q}_j\|_2
 \end{align}
+with probability 9/10.
 
 The reason the result is called a lemma is because Johnson and Lindenstrauss used it as a stepping stone to proving a different result.
 However, the lemma is immensely useful in its own right and has become a fundamental tool in machine learning.
@@ -222,7 +223,7 @@ We can then write
 \mathbb{E}[ \| \mathbf{\Pi} \mathbf{x} \|_2^2 ]
 = \sum_{i=1}^k \frac1{k} \mathbb{E}[ \langle \mathbf{\pi}_i, \mathbf{x}\rangle^2 ]
 = \frac1{k} \sum_{i=1}^k \mathbb{E}\left[
-\sum_{j=1}^d \left( \pi_{i}[j] \mathbf{x}_j \right)^2
+\sum_{j=1}^d \left( \pi_{i}[j] \mathbf{x}[j] \right)^2
 \right]
 \end{align*}
 where $\pi_{i}[j]$ is the $j$th entry of $\mathbf{\pi}_i$ and is drawn from the standard normal distribution.
@@ -241,7 +242,7 @@ In particular, let
 \begin{align*}
 Z_i = \sum_{j=1}^d \pi_{i,j} \mathbf{x}_j.
 \end{align*}
-We will briefly argue that $\pi_{i}[j] \cdot \mathbf{x}_j \sim \mathcal{N}(0, \mathbf{x}_j)$.
+We will briefly argue that $\pi_{i}[j] \cdot \mathbf{x}_j \sim \mathcal{N}(0, \mathbf{x}_j^2)$.
 If we assume that $\pi_{i}[j] \cdot \mathbf{x}_j$ is still a Gaussian random variable then we know the expectation is $0$ by linearity of expectation and the variance is $\mathbf{x}_j^2$ since $\textrm{Var}(c X) = c^2 \textrm{Var}(X)$ for any random variable $X$ and constant $c$.
 We will use this observation and apply the stability of Gaussian random variables to see that
 \begin{align*}
@@ -268,14 +269,14 @@ Then
 
 In our case,
 \begin{align*}
-\mathbb{E}[Z] = \mathbb{E}[\mathbf{\Pi x}]
-= \frac1{k} \sum_{i=1}^k \mathbb{E}[\langle \pi_i,\mathbf{x} \rangle ]
+Z = \|\mathbf{\Pi x}\|_2^2
+= \frac1{k} \sum_{i=1}^k (\langle \pi_i,\mathbf{x} \rangle)^2
 = \frac1{k} \sum_{i=1}^k Z_i^2.
 \end{align*}
 
 Applying the concentration inequality to $Z$, we have
 \begin{align*}
-\Pr(|\mathbf{\Pi x} - \| \mathbf{x}\|_2^2 | \geq \epsilon \| \mathbf{x}\|_2^2)
+\Pr(|\|\mathbf{\Pi x}\|_2^2 - \| \mathbf{x}\|_2^2 | \geq \epsilon \| \mathbf{x}\|_2^2)
 = \Pr(|Z - \mathbb{E}[Z] | \geq \epsilon \mathbb{E}[Z])
 \leq 2 e^{-\epsilon^2 k / 8} = \delta.
 \end{align*}
