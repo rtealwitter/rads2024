@@ -18,6 +18,8 @@ We saw how, without additional structure, we expect that learning in $d$ dimensi
 The JL lemma tells us how we can preserve $\ell_2$-norm distances between points.
 Let's see how we can preserve *similarity* between points.
 
+## Similarity Estimation
+
 Let's consider the following problem:
 How do services like Shazam match a song clip against a library of more than 11 million songs in a fraction of a second?
 To make the problem more challenging, the song clips we match generally have additional noise like background sound in a car.
@@ -27,7 +29,9 @@ The key idea is to use a *spectrogram* to represent the song clip.
 A spectrogram is a 2D matrix where the rows correspond to frequencies and the columns correspond to time.
 We then convert the spectrogram to a *fingerprint* by taking the peaks in the spectrogram represented as a high-dimensional binary vector.
 
-![](images/shazam.png)
+<p align="center">
+<img src="images/shazam.png" width="400"/>
+</p>
 
 The process is a little more challenging because song clips may be slightly off set from the song clips in our database. In order to make the method work, they use anchor points to align the song clips.
 But, for our purposes, we are primarily interested in how we can compress the high-dimensional binary vector.
@@ -35,7 +39,7 @@ But, for our purposes, we are primarily interested in how we can compress the hi
 Once we have a fingerprint from a song clip, we want to search our database for similar songs.
 Formally, given a binary vector $q \in \{0,1\}^d$ representing our song clip in $d$ dimensions, we want to find a nearby fingerprint $\mathbf{y} \in \{0,1\}^d$ in our database.
 The first challenge is that our database is possibly huge with $O(nd)$ bits where $n$ is the number of song clips.
-The second challenge is that it is expensive to compute the distance between $\mathbf{y}$ and $\mathbf{x}$ wit run time $O(d)$.
+The second challenge is that it is expensive to compute the distance between $\mathbf{y}$ and $\mathbf{x}$ with runtime $O(d)$.
 
 In light of these challenges, our goal is to design a more compact sketch for comparing $\mathbf{x}$ and $\mathbf{y}$. We ideally want to use $k \ll d$ space and time complexity.
 We will compute a compression $C(\mathbf{x})$ and $C(\mathbf{y})$ of $\mathbf{x}$ and $\mathbf{y}$, respectively.
@@ -71,12 +75,14 @@ we'll compute
 \begin{align*}
 c_i = \min_{j \in \{1, \ldots, d\}: \mathbf{x}_j = 1} h_i(j).
 \end{align*}
-In words, we hash each index where $\mathbf{x}$ is non-zero and hash it to a random value in $[0,1]$.
+In words, we hash each index where $\mathbf{x}$ is non-zero to a random value in $[0,1]$.
 Then we take the minimum value of the hash function over all the non-zero indices.
-The compression is $C(\mathbf{x}) = (c_1, \ldots, c_k)$.
+We call the compression $C(\mathbf{x}) = (c_1, \ldots, c_k)$.
 We can see this process represented in the figure below.
 
-![](images/minhash.png)
+<p align="center">
+<img src="images/minhash.png" width="400"/>
+</p>
 
 We'll argue that for all $i$,
 \begin{align*}
@@ -118,7 +124,7 @@ Chebyshev's inequality tells us that
 \end{align*}
 
 The additive error is $\epsilon= \alpha \frac{1}{\sqrt{k}}$.
-Since $\alpha = \sqrt{\delta}$, we have
+Since $\alpha = 1/\sqrt{\delta}$, we have
 $k = \frac1{\epsilon^2 \delta}$.
 
 We have shown that as long as $k=O(\frac1{\epsilon^2 \delta})$, then with probability $1-\delta$,
@@ -129,12 +135,11 @@ J(\mathbf{x}, \mathbf{y}) - \epsilon
 \end{align*}
 Notice that we only need $O(k)$ time to compute the estimate which is *independent* of the original fingerprint dimension $d$.
 
-We can improve the result to have a $\log(1/\delta)$ dependence using a Chernoff bound
-or the biased coin bound we showed in the [third lecture](https://www.chrismusco.com/amlds2023/notes/lecture03.html#Coin_Flips).
+We can improve the result to have a $\log(1/\delta)$ dependence using a Chernoff bound or the biased coin bound we showed in the concentration inequalities lecture.
 
 **Biased Coin Bound:**
 Let the probability that a coin lands heads be $b$.
-Choose $k \geq 3\log(2/\delta)$.
+Choose $k \geq \frac{3\log(2/\delta)}{\epsilon^2}$.
 If we flip a biased coin $k$ times, let $S$ be the number of heads.
 Notice that $\mu = bk$.
 Then
@@ -162,11 +167,13 @@ We know how to solve this problem in $\log_2 n$ time using binary search.
 We can generalize this approach to higher dimensions with data structures like k-d trees.
 Unfortunately, the runtime is roughly $O(d \min(n, 2^d))$ which is sublinear only for $d=o(\log n)$.
 
-High-dimensional vector search is exploding as a research area because of machine-elarning multi-model embeddings for images, text, and more.
+High-dimensional vector search is exploding as a research area because of machine-learning multi-model embeddings for images, text, and more.
 For example, models like CLIP allow us to embed images and text into a common space.
 Then we can search for images that are similar to a text query or vice versa.
 
-![](images/clip.png)
+<p align="center">
+<img src="images/clip.png" width="400"/>
+</p>
 
 There are many approaches to nearest neighbor search including spectral hashing and vector quantization.
 Today, we'll focus on locality sensitive hashing (LSH).
@@ -245,7 +252,7 @@ Now the probability that $\mathbf{x}$ and $\mathbf{y}$ are in the same slot in a
 + (1-J(\mathbf{x}, \mathbf{y})^r) \frac1{m}
 \end{align*}
 
-The full LSH scheme now has two parameters $r$ the number of bands and $t$ the number of tables.
+The full LSH scheme now has two parameters: $r$ the number of bands and $t$ the number of tables.
 Changing $r$ and $t$ changes the false positive and false negative rates.
 If we increase the number of tables $t$, we decrease the false negative rate and increase the false positive rate.
 If we decrease the number of bands $r$, we increase the false negative rate and decrease the false positive rate.
