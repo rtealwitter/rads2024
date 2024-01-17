@@ -196,7 +196,7 @@ In mathematical notation, we have
 \begin{align*}
 \Pr(h(\mathbf{x}) = h(\mathbf{y}))
 &= \Pr(c(\mathbf{x}) = c(\mathbf{y}))
-+ \left( 1- \Pr(c(\mathbf{x}) = c(\mathbf{y})) \right) \frac1{m} \\
++ \left( 1- \Pr(c(\mathbf{x})) = c(\mathbf{y})) \right) \frac1{m} \\
 &\leq J(\mathbf{x}, \mathbf{y}) + \frac1{m}.
 \end{align*}
 
