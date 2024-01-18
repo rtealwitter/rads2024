@@ -102,7 +102,7 @@ The matrix $\mathbf{\Sigma}$ is diagonal with non-negative entries $\sigma_1 \ge
 </p>
 
 Singular values are unique but factors are not.
-We would still get a valid decomposition if we multiply the $i$th column of $\mathbf{U} and $\mathbf{U}$ by $-1$.
+We would still get a valid decomposition if we multiply the $i$th column of $\mathbf{U}$ and $\mathbf{V}$ by $-1$.
 
 An important takeaway from singular value decomposition is how to view matrix multiplication.
 We can view multiplying any vector $\mathbf{a}$ by a matrix $\mathbf{X}$ to form $\mathbf{Xa}$ as a composition of three operations:
@@ -162,6 +162,7 @@ There are many applications of SVD including:
 
 We'll focus on a particularly useful application called low-rank approximations of $\mathbf{X}$.
 
+<!--
 ## Low-Rank Approximation
 
 The column span of a matrix $\mathbf{X} \in \mathbb{R}^{n \times d}$ is the set of all vectors that can be written as $\mathbf{Xa}$ for some $\mathbf{a} \in \mathbb{R}^d$.
@@ -241,6 +242,7 @@ While low-rank approximation and Johnson-Lindenstrauss projection are similar, t
 * Low-rank approximation is deterministic while Johnson-Lindenstrauss projection is randomized.
 
 * Low-rank approximation seeks to minimize the reconstruction error while Johnson-Lindenstrauss projection seeks to preserve pairwise distances with high probability.
+-->
 
 ## Best Low-Rank Approximation
 Low-rank approximations are very useful when our data has some structure.
@@ -293,7 +295,7 @@ Then
 \end{align*}
 since $\mathbf{V}^\top \mathbf{V} = \mathbf{I}$.
 
-Then we choose $\mathbf{B}$ so that $\mathbf{V}^\top \mathbf{B}^\top \mathbf{U}$ As the matrix which agrees with $\mathbf{\Sigma}$ on the largest $k$ singular values.
+Then we choose $\mathbf{B}$ so that $\mathbf{V}^\top \mathbf{B}^\top \mathbf{U}$ is the matrix which agrees with $\mathbf{\Sigma}$ on the largest $k$ singular values.
 It is intuitive but not obvious that the best rank-$k$ approximation to a diagonal matrix is a diagonal matrix that agrees on the largest $k$ values.
 
 **Claim (Orthogonal Projection):**
@@ -318,11 +320,11 @@ observe that the problem of finding the best rank $k$ approximation $\mathbf{Z}$
 \| \mathbf{Z}^\top \mathbf{D} \|_F^2 \\
 &= \arg \max_{\text{orthonormal rank $k$ } \mathbf{Z}} \sum_{i=1}^d \| \mathbf{Z}_i \|_2^2 \sigma_i^2
 \end{align*}
-where the second equality follows from the orthogonal projection claim, the third equality followes because $\| \mathbf{D} \|_F^2$ is a constant with respect to $\mathbf{Z}$, and $\mathbf{Z}_i$ is the $i$th row of $\mathbf{Z}$ in the final expression.
+where the second equality follows from the orthogonal projection claim, the third equality follows because $\| \mathbf{D} \|_F^2$ is a constant with respect to $\mathbf{Z}$, and $\mathbf{Z}_i$ is the $i$th row of $\mathbf{Z}$ in the final expression.
 Since $\mathbf{Z}$ is orthonormal and rank $k$, we have
 $$\sum_{i=1}^d \| \mathbf{Z}_i \|_2^2 = k.$$
 To see this, observe that sum of squared row norms is the sum of squared column norms which is $k$.
-Since $\mathbf{Z}$ has $k$ orthnormal orthonormal columns and $d < k$, we have
+Since $\mathbf{Z}$ has $k$ orthonormal columns and $d < k$, we have
 $$
 \| \mathbf{Z}_i \|_2^2 \leq 1.
 $$
