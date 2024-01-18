@@ -150,7 +150,7 @@ with probability 9/10.
 
 \paragraph{Hint 2:} Apply the Johnson-Lindenstrauss Lemma and Hint 1 to the term $\| \mathbf{\Pi x}_i + \mathbf{\Pi x}_j \|_2^2 - \| \mathbf{\Pi x}_i - \mathbf{\Pi x}_j \|_2^2$.
 
-\subsection*{Part 2 (1 point}
+\subsection*{Part 2 (1 point)}
 One powerful application of sketching is in database applications. For example, a common goal is to estimate the \emph{inner join size} of two tables without performing an actual inner join (which is expensive, as it requires enumerating the keys of the tables).
 Formally, consider two sets of unique keys $X = \{x_1, \ldots, x_m\}$ and $Y = \{y_1, \ldots, y_n\}$ which are subsets of $1,2, \ldots, U$. 
 Our goal is to estimate $|X\cap Y|$ based on small space compressions of $X$ and $Y$.  
@@ -170,23 +170,35 @@ with probability $9/10$.
 To support its largely visual platform, Pinterest runs a massive image de-duplication operation built on Locality Sensitive Hashing for Cosine Similarity. You can read about the actual system \href{https://medium.com/pinterest-engineering/detecting-image-similarity-using-spark-lsh-and-tensorflow-618636afc939}{here}.
 All information and numbers below are otherwise purely hypothetical.
 
-Pinterest has a database of $N = $ \textbf{1 billion} images. Each image in the database is pre-processed and represented as a vector $\mathbf{q}\in \mathbb{R}^d$. When a new image is pinned, it is also processed to form a vector $\mathbf{y} \in \mathbb{R}^d$. The goal is to check for any existing duplicates or near-duplicates to $\mathbf{y}$ in the database.  
-Specifically, Pinterest would like to flag an image $\mathbf{q}$ as a near-duplicate to $\mathbf{y}$ if $\cos(\theta(\mathbf{q},\mathbf{y})) \geq .98$. We want to find any near-duplicate with probability $\geq 99\%$. 
+Pinterest has a database of $N = $ \textbf{1 billion} images. Each image in the database is pre-processed and represented as a vector $\mathbf{q}\in \mathbb{R}^d$. When a new image is pinned, it is also processed to form a vector $\mathbf{y} \in \mathbb{R}^d$ and checked for any existing duplicates or near-duplicates to $\mathbf{y}$ in the database. 
 
-Given this requirement, your job is to design a multi-table LSH scheme using SimHash to find candidate near-duplicates, which can then be checked directly against $\mathbf{y}$. To support this task, Pinterest has collected data on the empirical distribution of $\cos(\theta(\mathbf{q},\mathbf{y}))$ for a typical new image $\mathbf{y}$. It roughly follows a bell-curve:
+\subsection*{Part 1}
+Write the probability that a vector $\mathbf{y}$ is checked as a function of the cosine similarity $\cos( \theta(\mathbf{q}, \mathbf{y}))$.
+As the number of tables $t$ increases, how does the probability change?
+As the number of bands $r$ increases, how does the probability change?
+
+\subsection*{Part 2}
+
+Pinterest has two simultaneous goals:
+\begin{enumerate}
+    \item If an image $\mathbf{y}$ has $\cos( \theta(\mathbf{q}, \mathbf{y})) =.98$, we want to check the image with probability $\geq 99\%$.
+    \item We want the total number of checks we make to be less than a constant $C$ to be specified later.
+\end{enumerate}
+
+Given these goals, your job is to design a multi-table LSH scheme to find candidate near-duplicates, which can then be checked directly against $\mathbf{q}$.
+To support this task, Pinterest has collected data on the empirical distribution of $\cos(\theta(\mathbf{q},\mathbf{y}))$ for a typical new image $\mathbf{q}$.
+It roughly follows a bell-curve:
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=.6\textwidth]{graphics/dist.png}
 \end{figure} 
 
-Pinterest wants to consider two possible computational targets for your LSH scheme, which will determine the speed of the de-duplication algorithm:
-\begin{enumerate}
-	\item Ensure that no more than $1$ million candidate near-duplicates are checked on average when a new image is pinned. ``Checked'' means that the image's cosine similarity with the new image is computed explicitly, which is a computationally expensive operation.
-	\item Ensure that no more than $200,000$ candidates are checked on average when a new image is pinned.
-\end{enumerate}
+Based on the data above, describe how to set parameters for your LSH scheme to minimize the space (i.e., number of tables) used when achieving the above goals for $C=1,000,000$ and $C=200,000$.
+Justify your answers, and any assumptions you make.
 
-\noindent Based on the data above, describe how to set parameters for your LSH scheme to minimize the space (i.e., number of tables) used, while achieving each of the above goals. Justify your answers, and any assumptions you make.
 If you code anything up to help calculate your answer, please attach the code. As in class, you can assume that each hash table has $m = O(N)$ slots and this is large enough to ignore lower order terms depending on $1/m$. 
+
+%\input{solutions/solution2_3}
 
 \end{document}
