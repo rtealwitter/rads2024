@@ -305,7 +305,7 @@ Let $\theta = \theta(\mathbf{x}, \mathbf{y})$.
 We will show that
 \begin{align*}
 \Pr( h(\mathbf{x}) = h(\mathbf{y}) )
-= 1 - \frac{\theta}{\pi} + \frac{1}{m}.
+= (1 - \frac{\theta}{\pi})^r + \frac{1}{m}.
 \end{align*}
 
 As an intermediate result, we will show that

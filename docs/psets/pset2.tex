@@ -134,7 +134,7 @@ We showed that a random matrix $\mathbf{\Pi} \in \mathbb{R}^{k \times d}$ satisf
 \end{align}
 with probability 9/10.
 
-\subsection*{Part 1}
+\subsection*{Part 1 (2 points)}
 Show that we can use the Johnson-Lindenstrauss Lemma as stated above to show that inner-products are also preserved.
 In particular, under the same conditions as above,
 \begin{align}
@@ -148,9 +148,9 @@ with probability 9/10.
 
 \paragraph{Hint 1:} Show that $\| \mathbf{x}_i - \mathbf{x}_j \|_2^2 = \| \mathbf{x}_i \|_2^2 - 2 \langle \mathbf{x}_i, \mathbf{x}_j \rangle + \| \mathbf{x}_j \|_2^2$.
 
-\paragraph{Hint 2:} Apply the Johnson-Lindenstrauss Lemma to the term $\| \mathbf{x}_i + \mathbf{x}_j \|_2^2 - \| \mathbf{x}_i - \mathbf{x}_j \|_2^2$.
+\paragraph{Hint 2:} Apply the Johnson-Lindenstrauss Lemma and Hint 1 to the term $\| \mathbf{\Pi x}_i + \mathbf{\Pi x}_j \|_2^2 - \| \mathbf{\Pi x}_i - \mathbf{\Pi x}_j \|_2^2$.
 
-\subsection*{Part 2}
+\subsection*{Part 2 (1 point}
 One powerful application of sketching is in database applications. For example, a common goal is to estimate the \emph{inner join size} of two tables without performing an actual inner join (which is expensive, as it requires enumerating the keys of the tables).
 Formally, consider two sets of unique keys $X = \{x_1, \ldots, x_m\}$ and $Y = \{y_1, \ldots, y_n\}$ which are subsets of $1,2, \ldots, U$. 
 Our goal is to estimate $|X\cap Y|$ based on small space compressions of $X$ and $Y$.  
@@ -162,5 +162,31 @@ Using your result from Part 1, describe a method based on inner product estimati
 with probability $9/10$.
 
 %\input{solutions/solution2_2.tex}
+
+\newpage
+
+\section*{Problem 3: LSH in the Wild}
+
+To support its largely visual platform, Pinterest runs a massive image de-duplication operation built on Locality Sensitive Hashing for Cosine Similarity. You can read about the actual system \href{https://medium.com/pinterest-engineering/detecting-image-similarity-using-spark-lsh-and-tensorflow-618636afc939}{here}.
+All information and numbers below are otherwise purely hypothetical.
+
+Pinterest has a database of $N = $ \textbf{1 billion} images. Each image in the database is pre-processed and represented as a vector $\mathbf{q}\in \mathbb{R}^d$. When a new image is pinned, it is also processed to form a vector $\mathbf{y} \in \mathbb{R}^d$. The goal is to check for any existing duplicates or near-duplicates to $\mathbf{y}$ in the database.  
+Specifically, Pinterest would like to flag an image $\mathbf{q}$ as a near-duplicate to $\mathbf{y}$ if $\cos(\theta(\mathbf{q},\mathbf{y})) \geq .98$. We want to find any near-duplicate with probability $\geq 99\%$. 
+
+Given this requirement, your job is to design a multi-table LSH scheme using SimHash to find candidate near-duplicates, which can then be checked directly against $\mathbf{y}$. To support this task, Pinterest has collected data on the empirical distribution of $\cos(\theta(\mathbf{q},\mathbf{y}))$ for a typical new image $\mathbf{y}$. It roughly follows a bell-curve:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.6\textwidth]{graphics/dist.png}
+\end{figure} 
+
+Pinterest wants to consider two possible computational targets for your LSH scheme, which will determine the speed of the de-duplication algorithm:
+\begin{enumerate}
+	\item Ensure that no more than $1$ million candidate near-duplicates are checked on average when a new image is pinned. ``Checked'' means that the image's cosine similarity with the new image is computed explicitly, which is a computationally expensive operation.
+	\item Ensure that no more than $200,000$ candidates are checked on average when a new image is pinned.
+\end{enumerate}
+
+\noindent Based on the data above, describe how to set parameters for your LSH scheme to minimize the space (i.e., number of tables) used, while achieving each of the above goals. Justify your answers, and any assumptions you make.
+If you code anything up to help calculate your answer, please attach the code. As in class, you can assume that each hash table has $m = O(N)$ slots and this is large enough to ignore lower order terms depending on $1/m$. 
 
 \end{document}
