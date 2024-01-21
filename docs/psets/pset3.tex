@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath, amsfonts}
+\usepackage{hyperref, graphicx}
+
+
+\title{CSCI 1052 Problem Set 3}
+\author{} % TODO: Put your name here
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Submission Instructions}
+
+Please upload your solutions by
+\textbf{5pm Friday January 26, 2024.}
+\begin{itemize}
+\item You are encouraged to discuss ideas
+and work with your classmates. However, you
+\textbf{must acknowledge} your collaborators
+at the top of each solution on which
+you collaborated with others 
+and you \textbf{must write} your solutions and code
+independently.
+\item Your solutions to theory questions must
+be typeset in LaTeX or markdown.
+I strongly recommend uploading the source LaTeX (found 
+\href{https://www.rtealwitter.com/rads2024/psets/pset3.tex}{here})
+to Overleaf for editing.
+\item I recommend that you write your solutions to coding question in a Jupyter notebook using Google Colab.
+\item You should submit your solutions as a \textbf{single PDF} via the assignment on Gradescope. You can enroll in the class using the code GPXX7N.
+\item Once you uploaded your solution, \textbf{mark where you answered each part of each question}.
+\end{itemize}
+
+\newpage
+
+\section*{Problem 1: Distance Reconstruction}
+
+Suppose you are given all pairwise distances between a set of points $\mathbf{x}_1, \ldots, \mathbf{x}_n \in \mathbb{R}^d$.
+You can assume that $d << n$.
+Let $\mathbf{D} \in \mathbb{R}^{n \times n}$ be the distance matrix with $\mathbf{D}_{i,j} = \| \mathbf{x}_i - \mathbf{x}_j \|_2^2$.
+You would like to recover the location of the original points, at least up to possible rotations and translations which do not change pairwise distances.
+Assume that $\sum_{i=1}^n \mathbf{x}_i = \mathbf{0}$.
+
+We can learn the sum of norms $\sum_{i=1}^n \| \mathbf{x}_i\|_2^2$ from $\mathbf{D}$.
+In particular,
+\begin{align*}
+\sum_{i=1}^n \sum{j=1}^n \mathbf{D}_{i,j} = \sum_{i}\sum_{j}
+\| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^2 - 2 \mathbf{x}_i^\top \mathbf{x}_j =
+\sum_{i} \left(\sum_{j} \| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^
+- 2 \mathbf{x}_i^\top \sum_{j} \mathbf{x}_j \right).
+\end{align*}
+By our assumption that the points are centered around the origin i.e., $\sum_j \mathbf{x}_j = \mathbf{0}$, we can conclude that
+\begin{align*}
+\sum_{i}\sum_{j} \mathbf{D}_{i,j} = \sum_i \sum_j \| \mathbf{x}_i \|_2^2 + \| \mathbf{x}_j \|_2^2 = 2n \sum_i \| \mathbf{x}_i \|_2^2.
+\end{align*}
+
+\subsection*{Part 1 (2 points)}
+Inspired by the above approach, describe an efficient algorithm for learning $\| \mathbf{x}_i \|_2^2$ for each $i$.
+
+Next, describe an algorithm for recovering a set of points $\mathbf{x}_1,\ldots, \mathbf{x}_n$ which realize the distances in $\mathbf{D}$.
+\textbf{Hint:} This is where you will use the SVD! It might help to prove that $\mathbf{D}$ has rank $\leq d + 2$.
+
+\subsection*{Part 2 (1 point)}
+Implement your algorithm and run it on the U.S. cities dataset provided in 
+\texttt{UScities.txt}\footnote{\texttt{\url{https://www.rtealwitter.com/rads2024/psets/UScities.txt}}}
+or 
+\texttt{UScities.csv}\footnote{\texttt{\url{https://www.rtealwitter.com/rads2024/psets/UScities.csv}}}.
+Note that the distances in the file are unsquared Euclidean distances, so you need to square them to obtain $\mathbf{D}$. Plot your  estimated city locations on a 2D plot and label the cities to make it clear how the plot is oriented. Submit these images and your code with the problem set.
+
+%\input{solutions/solution3_1}
+
+\end{document}

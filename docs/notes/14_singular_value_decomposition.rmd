@@ -20,7 +20,7 @@ The next part of this course will cover numerical linear algebra.
 Recall that an eigenvalue of a square matrix $\mathbf{X} \in \mathbb{R}^{d \times d}$ is any vector $\mathbf{v}$ such that $\mathbf{Xv} = \lambda \mathbf{v}$ for some scalar $\lambda$.
 
 The matrix $\mathbf{X}$ has at most $d$ linearly independent eigenvectors.
-If it has a full set of $d$ eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_d$ with eigenvalues $\lambda_1 \geq \ldots \geq \lambda_d$, the matrix is called diagonalizable and can be written as
+If it has a full set of $d$ eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_d$ where $\|\mathbf{v}_i\|_2 = 1$ for all $i$ and with eigenvalues $\lambda_1 \geq \ldots \geq \lambda_d$, the matrix is called diagonalizable and can be written as
 $$
 \mathbf{X} = \mathbf{V} \mathbf{\Lambda} \mathbf{V}^{-1}.
 $$
@@ -35,7 +35,9 @@ If a square matrix $\mathbf{V}$ has orthonormal rows, it also has orthonormal co
 <img src="images/orth_square.png" width="400px">
 </p>
 
-That is, $\mathbf{V}^\top \mathbf{V} = \mathbf{I}$ and $\mathbf{V} \mathbf{V}^\top = \mathbf{I}$.
+That is, $\mathbf{V} \mathbf{V}^\top = \mathbf{I}$ because the eigenvectors are orthonormal.
+Then, by definition, $\mathbf{V}^{-1} = \mathbf{V}^\top$.
+Next, because $\mathbf{V}^\top$ is full rank, we can write $\mathbf{I} = \mathbf{V}^\top (\mathbf{V}^\top)^{-1}=\mathbf{V}^\top (\mathbf{V}^{-1})^{-1}= \mathbf{V}^\top \mathbf{V}$.
 
 This implies that, for any vector $\mathbf{x}$, $\| \mathbf{V x}\|_2^2 = \| \mathbf{x} \|_2^2 = \| \mathbf{V}^\top \mathbf{x} \|_2^2$.
 
@@ -50,7 +52,7 @@ To see this, we can write
 A similar set of steps shows that $\| \mathbf{V}^\top \mathbf{x} \|_2^2 = \| \mathbf{x} \|_2^2$.
 
 We have the same property for the Frobenius norm of a matrix.
-For any square matrix $\mathbf{X} \in \mathbb{R}^{d \times d}$, the Frobenius norm $\| \mathbf{X} \|_F^2$ is defined as the sum of squared entries $\sum_{i=1}^n \sum_{i,j} x_{ij}^2$.
+For any square matrix $\mathbf{X} \in \mathbb{R}^{d \times d}$, the Frobenius norm $\| \mathbf{X} \|_F^2$ is defined as the sum of squared entries $\sum_{i,j} x_{ij}^2$.
 To see that the same property holds for the Frobenius norm, we can write
 \begin{align*}
 \| \mathbf{V X}\|_F^2
@@ -60,30 +62,6 @@ To see that the same property holds for the Frobenius norm, we can write
 \end{align*}
 where $\mathbf{X}_i$ denotes the $i$th column of $\mathbf{X}$ and the second equality follows from the previous result.
 A similar set of steps shows that $\| \mathbf{V}^\top \mathbf{X} \|_F^2 = \| \mathbf{X} \|_F^2$.
-
-These properties are not true for rectangular matrices.
-Let $\mathbf{V} \in \mathbb{R}^{d \times k}$ with $d > k$ be a matrix with orthogonal columns.
-Then $\mathbf{V}^\top \mathbf{V} = \mathbf{I}$ but $\mathbf{V} \mathbf{V}^\top \neq \mathbf{I}$.
-
-<p align="center">
-<img src="images/orth_rect.png" width="400px">
-</p>
-
-Similarly, for any $\mathbf{x}$, $\| \mathbf{V x}\|_2^2 = \| \mathbf{x} \|_2^2$ but $\| \mathbf{V}^\top \mathbf{x} \|_2^2 \neq \| \mathbf{x} \|_2^2$.
-
-Multiplying a vector by a matrix $\mathbf{V}$ with orthonromal columns rotates and/or reflects the vector.
-
-<p align="center">
-<img src="images/rotation.png" width="400px">
-</p>
-
-Multiplying a vector by a matrix $\mathbf{V}^\top$ with orthonormal rows projects the vector into a lower dimensional space (representing it as coordinates int he lower dimensional space).
-
-<p align="center">
-<img src="images/project.png" width="400px">
-</p>
-
-So we always have that $\| \mathbf{V x}\|_2 \leq \| \mathbf{x} \|_2$.
 
 ## Singular Value Decomposition
 
@@ -104,6 +82,34 @@ The matrix $\mathbf{\Sigma}$ is diagonal with non-negative entries $\sigma_1 \ge
 Singular values are unique but factors are not.
 We would still get a valid decomposition if we multiply the $i$th column of $\mathbf{U}$ and $\mathbf{V}$ by $-1$.
 
+For the eigendecomposition, we showed that $\|\mathbf{V} \mathbf{x}\|_2^2 = \| \mathbf{x} \|_2^2 = \| \mathbf{V}^\top \mathbf{x} \|_2^2$.
+It then followed that $\| \mathbf{V} \mathbf{X} \|_F^2 = \| \mathbf{X} \|_F^2$ and $\| \mathbf{V}^\top \mathbf{X} \|_F^2 = \| \mathbf{X} \|_F^2$.
+Not all of these properties are true for singular value decomposition.
+
+These properties are not true for rectangular matrices.
+Let $\mathbf{U} \in \mathbb{R}^{n \times d}$ with $n > d$ be a matrix with orthogonal columns.
+Then $\mathbf{U}^\top \mathbf{U} = \mathbf{I}$ but $\mathbf{U} \mathbf{U}^\top \neq \mathbf{I}$.
+
+<p align="center">
+<img src="images/orth_rect.png" width="400px">
+</p>
+
+Similarly, for any $\mathbf{x}$, $\| \mathbf{U x}\|_2^2 = \| \mathbf{x} \|_2^2$ but $\| \mathbf{U}^\top \mathbf{x} \|_2^2 \neq \| \mathbf{x} \|_2^2$.
+
+Multiplying a vector by a matrix $\mathbf{U}$ with orthonormal columns rotates and/or reflects the vector.
+
+<p align="center">
+<img src="images/rotation.png" width="400px">
+</p>
+
+Multiplying a vector by a matrix $\mathbf{U}^\top$ with orthonormal rows projects the vector into a lower dimensional space (representing it as coordinates in the lower dimensional space).
+
+<p align="center">
+<img src="images/project.png" width="400px">
+</p>
+
+So we always have that $\| \mathbf{U}^\top \mathbf{x} \|_2 \leq \| \mathbf{x} \|_2$.
+
 An important takeaway from singular value decomposition is how to view matrix multiplication.
 We can view multiplying any vector $\mathbf{a}$ by a matrix $\mathbf{X}$ to form $\mathbf{Xa}$ as a composition of three operations:
 
@@ -118,13 +124,14 @@ $$
 \mathbf{X a} = \mathbf{U} \left( \mathbf{\Sigma} \left( \mathbf{V}^\top \mathbf{a} \right) \right).
 $$
 
+
 Let's compare singular value decomposition to eigendecomposition.
 
 * Singular value decomposition exists for all matrices (square or rectangular) while eigendecomposition only exists for some square matrices.
 
 * Singular values are always positive while eigenvalues can be positive or negative.
 
-* The factors $\mathbf{U}$ and $\mathbf{V}$ in singular value composition have orthogonal columns while the factor $\mathbf{V}$ in eigendecomposition has orthogonal coumns if and only if $\mathbf{X}$ is symmetric.
+* The factors $\mathbf{U}$ and $\mathbf{V}$ in singular value composition have orthogonal columns while the factor $\mathbf{V}$ in eigendecomposition has orthogonal columns if and only if $\mathbf{X}$ is full rank.
 
 We can connect singular value decomposition with eigendecomposition by considering the matrix $\mathbf{X}^\top \mathbf{X}$.
 The factor $\mathbf{U}$ contains the orthogonal eigenvectors of $\mathbf{X} \mathbf{X}^\top$
@@ -359,7 +366,7 @@ $$
 \| \mathbf{X} - \mathbf{X}_k \|_F^2
 = \| \mathbf{X} \|_F^2 - \| \mathbf{X}_k \|_F^2
 = \sum_{i=1}^n \sigma_i^2 - \sum_{i=1}^k \sigma_i^2
-= \sum_{i=1}^k \sigma_i^2.
+= \sum_{i=k+1}^n \sigma_i^2.
 $$
 
 We can see this because

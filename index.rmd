@@ -31,6 +31,7 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   :--- | :--- | :---
   [Problem Set 1](psets/pset1.pdf) ([LaTeX](psets/pset1.tex)) | Friday 1/12 | Monday 1/15
   [Problem Set 2](psets/pset2.pdf) ([LaTeX](psets/pset2.tex)) | Friday 1/19 | Monday 1/22
+  [Problem Set 3](psets/pset3.pdf) ([LaTeX](psets/pset3.tex)) | Friday 1/26 | Monday 1/29
   [Project Proposal](project/proposal.pdf) ([LaTeX](project/proposal.tex)) | Monday 1/22 |
   </div>
 </div>
@@ -48,7 +49,7 @@ Thursday 1/11  | Concentration Inequalities | [Notes](notes/05_concentration_ine
 Tuesday 1/16   | High-Dimensional Geometry | [Notes](notes/06_high_dimensional_geometry.html) | [Slides](lectures/lecture06.pdf) | </tr><tr>
 Wednesday 1/17 | Dimensionality Reduction | [Notes](notes/07_dimensionality_reduction.html) | [Slides](lectures/lecture07.pdf) | </tr><tr>
 Thursday 1/18  | Similarity Estimation | [Notes](notes/08_similarity_estimation.html) | [Slides](lectures/lecture08.pdf) | </tr><tr>
-Monday 1/22    | Singular Value Decomposition | [Notes](notes/14_singular_value_decomposition.html) |  | </tr><tr>
+Monday 1/22    | Singular Value Decomposition | [Notes](notes/14_singular_value_decomposition.html) | [Slides](lectures/lecture09.pdf) | </tr><tr>
 Tuesday 1/23   | Power Method | [Notes](notes/15_power_method.html) |  | </tr><tr>
 Wednesday 1/24 | Spectral Graph Theory | [Notes](notes/16_spectral_graph_theory.html) |  | </tr><tr>
 Thursday 1/25  | Sketched Regression | [Notes](notes/17_sketched_regression.html) |  | </tr><tr>
