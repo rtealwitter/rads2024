@@ -36,7 +36,7 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   </div>
 </div>
 
-**Resources**: This class uses material from Chris Musco's phenomenal graduate Algorithmic Machine Learning and Data Science [course](https://chrismusco.com/amlds2023/) at NYU Tandon. For each class, I will post my typed notes and the handwritten slides we use in class.
+**Resources**: This class uses material from Chris Musco's phenomenal graduate Algorithmic Machine Learning and Data Science [course](https://www.chrismusco.com/amlds2023/) at NYU Tandon. For each class, I will post my typed notes and the handwritten slides we use in class.
 
 <tr>
 Class | Topic | Notes | Slides </tr><tr>
