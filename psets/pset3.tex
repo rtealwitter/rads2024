@@ -40,7 +40,7 @@ to Overleaf for editing.
 \section*{Problem 1: Distance Reconstruction}
 
 Suppose you are given all pairwise distances between a set of points $\mathbf{x}_1, \ldots, \mathbf{x}_n \in \mathbb{R}^d$.
-You can assume that $d << n$.
+You can assume that $d \ll n$.
 Let $\mathbf{D} \in \mathbb{R}^{n \times n}$ be the distance matrix with $\mathbf{D}_{i,j} = \| \mathbf{x}_i - \mathbf{x}_j \|_2^2$.
 You would like to recover the location of the original points, at least up to possible rotations and translations which do not change pairwise distances.
 Assume that $\sum_{i=1}^n \mathbf{x}_i = \mathbf{0}$.
@@ -48,9 +48,9 @@ Assume that $\sum_{i=1}^n \mathbf{x}_i = \mathbf{0}$.
 We can learn the sum of norms $\sum_{i=1}^n \| \mathbf{x}_i\|_2^2$ from $\mathbf{D}$.
 In particular,
 \begin{align*}
-\sum_{i=1}^n \sum{j=1}^n \mathbf{D}_{i,j} = \sum_{i}\sum_{j}
+\sum_{i=1}^n \sum_{j=1}^n \mathbf{D}_{i,j} = \sum_{i}\sum_{j}
 \| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^2 - 2 \mathbf{x}_i^\top \mathbf{x}_j =
-\sum_{i} \left(\sum_{j} \| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^
+\sum_{i} \left(\sum_{j} \| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^2
 - 2 \mathbf{x}_i^\top \sum_{j} \mathbf{x}_j \right).
 \end{align*}
 By our assumption that the points are centered around the origin i.e., $\sum_j \mathbf{x}_j = \mathbf{0}$, we can conclude that

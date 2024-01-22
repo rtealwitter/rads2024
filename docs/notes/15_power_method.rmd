@@ -65,7 +65,7 @@ First however, let's see what it suffices to prove.
 
 **Claim 1**: If $c_j^{(q)}/c_1^{(q)} \leq \sqrt{\epsilon/d}$ for all $j\neq 1$ than either $\|\mathbf{v}_1 -\mathbf{z}^{(q)}\|_2^2\leq 2\epsilon$ or $\|-\mathbf{v}_1 - \mathbf{z}^{(q)}\|_2^2\leq 2\epsilon$ . 
 
-*Proof.* Since $c_1^{(q)} \leq 1$, the above would imply that $c_j^{(q)} \leq \sqrt{\epsilon/d}$.  Since $\sum_{k=1}^d \left(c_k^{(q)}\right)^2 = 1$ it follows that $\left(c_1^{(q)}\right)^2 \geq (1-\epsilon)$ and thus $\left|c_1^{(q)}\right| \geq 1-\epsilon$. Then for any unit vector $\mathbf{x}$ we have $\|\mathbf{x} -\mathbf{z}^{(q)}\|_2 = 2 - 2\langle\mathbf{x},\mathbf{z}^{(q)}\rangle$. Since  $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle = c_1^{(q)}$ we conclude that either $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$ or  $\langle- \mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$. Suppose without loss of generality it's the first: $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$. Then  we would conclude that $\|\mathbf{v}_1 -\mathbf{z}^{(q)}\|_2 = 2 - 2\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \leq 2 - 2\cdot (1-\epsilon) = 2\epsilon$. $\square$ 
+*Proof.* Since $c_1^{(q)} \leq 1$, the above would imply that $c_j^{(q)} \leq \sqrt{\epsilon/d}$.  Since $\sum_{k=1}^d \left(c_k^{(q)}\right)^2 = 1$ it follows that $\left(c_1^{(q)}\right)^2 \geq (1-\epsilon)$ and thus $\left|c_1^{(q)}\right| \geq 1-\epsilon$. Then for any unit vector $\mathbf{x}$ we have $\|\mathbf{x} -\mathbf{z}^{(q)}\|_2^2 = 2 - 2\langle\mathbf{x},\mathbf{z}^{(q)}\rangle$. Since  $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle = c_1^{(q)}$ we conclude that either $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$ or  $\langle- \mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$. Suppose without loss of generality it's the first: $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$. Then  we would conclude that $\|\mathbf{v}_1 -\mathbf{z}^{(q)}\|_2 = 2 - 2\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \leq 2 - 2\cdot (1-\epsilon) = 2\epsilon$. $\square$ 
 
 So, to show power methods converges, our goal is to prove that $\left|c_j^{(q)}/c_1^{(q)}\right| \leq \sqrt{\epsilon/d}$ for all $j\neq 1$. 
 
@@ -75,7 +75,7 @@ To prove this bound, we note that $c_j^{(q)} = S\cdot \sigma_j^{2q} c_j^{(0)}$ f
 $$
 \left|\frac{c_j^{(q)} }{c_1^{(q)} }\right| = (\sigma_j/\sigma_1)^{2q} \left|\frac{c_j^{(0)} }{c_1^{(0)} }\right|.
 $$
-As claimed in class (and can be prove as an exercise -- try using rotational invariance of the Gaussian ) if $z^{(0)}$ is a randomly initialized start vector,   $\left|\frac{c_j^{(0)} }{c_1^{(0)} }\right| \leq d^{3}$ with high proability. That may seem like a lot, but $(\sigma_j/\sigma_1)^{2q}$ is going to be a tiny number, so will easily cancel that out. In particular, 
+As claimed in class (and can be prove as an exercise -- try using rotational invariance of the Gaussian ) if $z^{(0)}$ is a randomly initialized start vector,   $\left|\frac{c_j^{(0)} }{c_1^{(0)} }\right| \leq d^{3}$ with high probability. That may seem like a lot, but $(\sigma_j/\sigma_1)^{2q}$ is going to be a tiny number, so will easily cancel that out. In particular, 
 $$
 (\sigma_j/\sigma_1)^{2q} = \left(1-\frac{\sigma_1-\sigma_j}{\sigma_1}\right)^{2q} \leq (1-\gamma)^{2q},
 $$
@@ -91,14 +91,14 @@ as desired.
 
 #### Alternative Guarantee
 
-In machine learning applications, we care less about actually approximating $\mathbf{v}_1$, and more that the $\mathbf{z}$ is a "good top singular vector" in that it offers a good rank-1 approximation to $\mathbf{X}$. Tha tis, we want to prove that $$\|\mathbf{X} - \mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2 = \|\mathbf{X}\|_F^2 - \|\mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2$$ is small, or equivalently, that $$\|\mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2$$ is large. The largest it could be is $\|\mathbf{X}\mathbf{v}_1\mathbf{v}_1^\top\|_F^2 = \sigma_1^2$. And from the same argument above, where we claimed that  either $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$ or  $\langle- \mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$, it is not hard to check that $$\|\mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2 \geq (1-\epsilon)^2 \sigma_1^2$$, so after 
-$O\left(\frac{\log(d/\epsilon)}{\gamma}\right)$ we get a near optimal low-rank approximation. 
+In machine learning applications, we care less about actually approximating $\mathbf{v}_1$, and more that the $\mathbf{z}$ is a "good top singular vector" in that it offers a good rank-1 approximation to $\mathbf{X}$. Tha tis, we want to prove that $$\|\mathbf{X} - \mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2 = \|\mathbf{X}\|_F^2 - \|\mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2$$ is small, or equivalently, that $$\|\mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2$$ is large. The largest it could be is $\|\mathbf{X}\mathbf{v}_1\mathbf{v}_1^\top\|_F^2 = \sigma_1^2$. And from the same argument above, where we claimed that  either $\langle\mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$ or  $\langle- \mathbf{v}_1,\mathbf{z}^{(q)}\rangle \geq 1-\epsilon$, it is not hard to check that $$\|\mathbf{X}\mathbf{z}\mathbf{z}^\top\|_F^2 \geq (1-\epsilon)^2 \sigma_1^2,$$ so after 
+$O\left(\frac{\log(d/\epsilon)}{\gamma}\right)$ iterations we get a near optimal low-rank approximation. 
 
 ## The Lanczos Method	
 
 We will now see how to improve on power method using what is known as the Lanczos method. Like power method, Lanczos is considered a **Krylov subspace method** because it will return a solution **in the span of the Krylov subspace** that we introduced before. Power method clearly does this -- it returns a scaling of the last column of $K$. The whole idea behind Lanczos is to avoid "throwing away'" information from earlier columns like power method, but instead to take advantage of the whole space. It turns at that doing so can be very helpful -- we will get a bound that depends on $1/\sqrt{\gamma}$ instead of $1/\gamma$. 
 
-Specifically, to definte the Lanczos method, we will let $\mathbf{Q}\in \mathbb{R}^{d\times k}$ be a matrix with orthonormal columns that spans $K$. In practice, you need to be careful about how this is computed for numerical stability reasons, but we won't worry about that for now. Imagine your computer has infinite precision and we just compute $\mathbf{Q}$ by orthonormalizing $K$. 
+Specifically, to define the Lanczos method, we will let $\mathbf{Q}\in \mathbb{R}^{d\times k}$ be a matrix with orthonormal columns that spans $K$. In practice, you need to be careful about how this is computed for numerical stability reasons, but we won't worry about that for now. Imagine your computer has infinite precision and we just compute $\mathbf{Q}$ by orthonormalizing $K$. 
 
 **Lanczos Method**
 
@@ -106,7 +106,7 @@ Specifically, to definte the Lanczos method, we will let $\mathbf{Q}\in \mathbb{
 * Let $\mathbf{z}$ be the top eigenvector of $\mathbf{Q}^\top \mathbf{A}\mathbf{Q} = \mathbf{Q}^\top \mathbf{X}^\top \mathbf{X} \mathbf{Q}$ 
 * Return $\mathbf{Q} \mathbf{z}$. 
 
-Importantly, the first step only requires $q$ matrix-vector multiplications with $\mathbf{X}^\top\mathbf{X}$, each of which can be implemented in $O(nd)$ time, just like we did for power method. The second step might look a bit circular at first glance. We want an approximation algorithm for computing the top eigenvector of ${\mathbf{X}}^\top\mathbf{X}$ and the above method uses a top eigenvector algorithm as a subroutine. But note that $\mathbf{Q}^\topA{\mathbf{Q}}$ only has size $q\times q$, where $q\ll d$ is our iteration count. So even if it's too expensive to compute a direct eigendecomposition of $\mathbf{X}^\top\mathbf{X}$, ${\mathbf{Q}}^\top{\mathbf{X}}^\top{\mathbf{X}}{\mathbf{Q}}$ can be computed in $O(ndq) + O(dq^2) + O(q^3) + O(ndq)$ time (the first part is the time to construct $\mathbf{Q}$ and $\mathbf{X}\mathbf{Q}$, the second to compute ${\mathbf{Q}}^\top{\mathbf{X}}^\top{\mathbf{X}}{\mathbf{Q}}$, and the third to find its top eigenvector using a direct method).
+Importantly, the first step only requires $q$ matrix-vector multiplications with $\mathbf{X}^\top\mathbf{X}$, each of which can be implemented in $O(nd)$ time, just like we did for power method. The second step might look a bit circular at first glance. We want an approximation algorithm for computing the top eigenvector of ${\mathbf{X}}^\top\mathbf{X}$ and the above method uses a top eigenvector algorithm as a subroutine. But note that $\mathbf{Q}^\top {\mathbf{AQ}}$ only has size $q\times q$, where $q\ll d$ is our iteration count. So even if it's too expensive to compute a direct eigendecomposition of $\mathbf{X}^\top\mathbf{X}$, ${\mathbf{Q}}^\top{\mathbf{X}}^\top{\mathbf{X}}{\mathbf{Q}}$ can be computed in $O(ndq) + O(dq^2) + O(q^3) + O(ndq)$ time (the first part is the time to construct $\mathbf{Q}$ and $\mathbf{X}\mathbf{Q}$, the second to compute ${\mathbf{Q}}^\top{\mathbf{X}}^\top{\mathbf{X}}{\mathbf{Q}}$, and the third to find its top eigenvector using a direct method).
 
 #### Analysis Preliminaries 
 
@@ -116,7 +116,7 @@ Our first claim is that Lanczos returns the *best* approximate singular vector i
 
 *Proof.* First, we can prove that $\mathbf{y}$ should always be chosen to have unit norm, so that $\mathbf{y}\mathbf{y}^\top$ is a projection. Accordingly, it must also be that $\mathbf{x} = \mathbf{Q}^\top\mathbf{y}$ has unit norm. Then, proving the claim above is equivalent to proving that $\mathbf{y}^* = {\mathbf{Q}}\mathbf{z}$ maximizes $\|\mathbf{X}\mathbf{y}\mathbf{y}^\top\|_F^2 = \|\mathbf{X}\mathbf{y}\|_F^2 = \|\mathbf{X}\mathbf{y}\|_2^2 = \|\mathbf{X}\mathbf{Q}\mathbf{x}\|_2^2$. It is not hard to check that setting $\mathbf{x}$ to be the maximum right singular vector of ${\mathbf{X}}{\mathbf{Q}}$ maximizes this $\|\mathbf{X}\mathbf{Q}\mathbf{x}\|_2^2$ amongst all unit vectors, and this right singular vector is the same at the top eigenvector of $\mathbf{Q}^\top \mathbf{X}^\top \mathbf{X} \mathbf{Q}$. 
 
-**Claim 3**: If we run the Lanczos method for $O\left(\frac{\log(d/\epsilon)}{\sqrt{\gamma}}\right)$ There is *some* vector $\mathbf{w}$ of the form $\mathbf{w} = \mathbf{Q}\mathbf{x}$ such that either either $\langle\mathbf{v}_1,\mathbf{w}\rangle \geq 1-\epsilon$ or  $\langle- \mathbf{v}_1,\mathbf{w}\rangle \geq 1-\epsilon$. 
+**Claim 3**: If we run the Lanczos method for $O\left(\frac{\log(d/\epsilon)}{\sqrt{\gamma}}\right)$ There is *some* vector $\mathbf{w}$ of the form $\mathbf{w} = \mathbf{Q}\mathbf{x}$ such that either $\langle\mathbf{v}_1,\mathbf{w}\rangle \geq 1-\epsilon$ or  $\langle- \mathbf{v}_1,\mathbf{w}\rangle \geq 1-\epsilon$. 
 
 In other words, there is some $\mathbf{w}$ in the Krylov subspace that has a large inner product with the true top singular vector $\mathbf{v}_1$. As seen earlier for power method, this can be used to prove that e.g. $\|\mathbf{X}\mathbf{w}\mathbf{w}^\top\|_F^2$ is large, and from **Claim 2**, we know that the $\mathbf{v}$ returned by Lanczos can only do better. So, we focus on proving **Claim 3**. 
 
@@ -126,7 +126,7 @@ The key idea is to observe that any vector in the span of the Krylov subspace of
 $$
 \mathbf{w} = p(\mathbf{A})\mathbf{z}^{(0)},
 $$
-for some **degree q polynomial** $p$. For example, we might have $p(A) = 2\mathbf{\mathbf{A}}^2 - 4\mathbf{A}^3 + \mathbf{A}^6$ or $p(\mathbf{A}) = I - \mathbf{A} - 10\mathbf{A}^5$. And moreover, for any degree $q$ polynomial $p$, there is *some* $\mathbf{x}$ such that  $\mathbf{Q}\mathbf{x} = p(\mathbf{A})\mathbf{z}^{(0)}$. To see that this is true, we note that all of the monomials $\mathbf{z}^{(0)}, A\mathbf{z}^{(0)}, \ldots, \mathbf{A}^q\mathbf{z}^{(0)}$ lie in the span of $\mathbf{Q}$, so any linear combination does as well. 
+for some **degree q polynomial** $p$. For example, we might have $p(\mathbf{A}) = 2\mathbf{\mathbf{A}}^2 - 4\mathbf{A}^3 + \mathbf{A}^6$ or $p(\mathbf{A}) = I - \mathbf{A} - 10\mathbf{A}^5$. And moreover, for any degree $q$ polynomial $p$, there is *some* $\mathbf{x}$ such that  $\mathbf{Q}\mathbf{x} = p(\mathbf{A})\mathbf{z}^{(0)}$. To see that this is true, we note that all of the monomials $\mathbf{z}^{(0)}, A\mathbf{z}^{(0)}, \ldots, \mathbf{A}^q\mathbf{z}^{(0)}$ lie in the span of $\mathbf{Q}$, so any linear combination does as well. 
 
 This means that showing there is a good approximate top singular vector $\mathbf{w}$ in the span of the Krylov subspace can be reduced to finding a **good polynomial $p(\mathbf{A})$**. Specifically, notice that, if we write $p(\mathbf{A})\mathbf{z}^{(0)}$ in the span of the singular vectors we have:
 $$
@@ -136,7 +136,7 @@ where
 $$
 g_j = c_j^{(0)}p(\sigma_j^2).
 $$
-Our goal, which is exactly the same as when we analyzed power method, is to show that $g_1$ is *much larger* than $g_j$ for all $j \neq 1$.  In other words we want to find a polynomial such that $p(t)$ is small for all values of  $0\leq t< \sigma_1^2$, but then the polynomial should suddenly **jump** to be large at $$\sigma_1$$. The simplest degree $q$ polynomial that does this is $p(t) = t^q$. However, it turns out there are more *sharply* jumping polynomials, which can be obtained by shifting/scaling a type of polynomials known as a [Chebyshev polynomial](https://en.wikipedia.org/wiki/Chebyshev_polynomials). An example that jumps at $\sigma_1^2 = 1$ is shown below. The difference from $t^q$ is pretty remarkable -- even though the polynomial $p$ shown below is nearly as small for all $0\leq t< 1$, it is much larger at $t=1$. 
+Our goal, which is exactly the same as when we analyzed power method, is to show that $g_1$ is *much larger* than $g_j$ for all $j \neq 1$.  In other words we want to find a polynomial such that $p(t)$ is small for all values of  $0\leq t< \sigma_1^2$, but then the polynomial should suddenly **jump** to be large at $\sigma_1$. The simplest degree $q$ polynomial that does this is $p(t) = t^q$. However, it turns out there are more *sharply* jumping polynomials, which can be obtained by shifting/scaling a type of polynomials known as a [Chebyshev polynomial](https://en.wikipedia.org/wiki/Chebyshev_polynomials). An example that jumps at $\sigma_1^2 = 1$ is shown below. The difference from $t^q$ is pretty remarkable -- even though the polynomial $p$ shown below is nearly as small for all $0\leq t< 1$, it is much larger at $t=1$. 
 
 <p align="center">
 <img src="images/basic_jump.png" width="400px">
@@ -152,11 +152,11 @@ Concretely we can claim the following, which is a bit tricky to prove, but well 
 
 In contrast, to ensure that $t^q$ satisfies the above, we would need degree q = $O\left({\frac{1}{\gamma}\log\frac{1}{\epsilon}}\right)$ -- a quadratically worse bound. This is what will account for the quadratic difference in performance between the Lanczos and Power Methods. 
 
-The fact that there exist much steeper low-degree polynomails than $t^q$ is the sort of thing studied in the mathematical field known as Approximation Theory. That might see pretty obscure, but steep polynomials are surprisingly useful in computer science, appearing everywhere from [classic](https://dl.acm.org/doi/10.1145/129712.129757), to [Quantum complexity theory](https://arxiv.org/pdf/quant-ph/9802049.pdf), to [learning theory](http://www.cs.columbia.edu/~rocco/Public/stoc01.pdf). If you're interested in learning more about this, check out slides for this [talk](http://people.cs.georgetown.edu/jthaler/QuICSslides.pdf).
+The fact that there exist much steeper low-degree polynomails than $t^q$ is the sort of thing studied in the mathematical field known as Approximation Theory. That might seem pretty obscure, but steep polynomials are surprisingly useful in computer science, appearing everywhere from [classic](https://dl.acm.org/doi/10.1145/129712.129757), to [Quantum complexity theory](https://arxiv.org/pdf/quant-ph/9802049.pdf), to [learning theory](http://www.cs.columbia.edu/~rocco/Public/stoc01.pdf). If you're interested in learning more about this, check out slides for this [talk](http://people.cs.georgetown.edu/jthaler/QuICSslides.pdf).
 
 #### Finishing Up
 
-Finally, we use **Claim 4** to finish the analysis of Lanczos. Consider the vector $\hat{p}\left(\frac{1}{\sigma_1^2}A\right)\mathbf{z}^{(0)}$, which as argued above lies in the Krylov subspace. As discussed below equation (7), our job is to prove that:
+Finally, we use **Claim 4** to finish the analysis of Lanczos. Consider the vector $\hat{p}\left(\frac{1}{\sigma_1^2}A\right)\mathbf{z}^{(0)}$, which as argued above lies in the Krylov subspace. As discussed before, our job is to prove that:
 $$
 \frac{c_j^{(0)}\hat{p}\left(\frac{1}{\sigma_1^2}\sigma_j^2\right)}{c_1^{(0)}\hat{p}\left(\frac{1}{\sigma_1^2}\sigma_1^2\right)} \leq \sqrt{\epsilon/d},
 $$
@@ -164,7 +164,7 @@ for all $j \neq i$, as long as $\hat{p}$ is chosen to have degree $q = O\left(\s
 
 Consider the numerator first. $\frac{\sigma_j^2}{\sigma_1^2} = \left(\frac{\sigma_j}{\sigma_1}\right)^2 = \left(1 - \left(1-\frac{\sigma_j}{\sigma_1}\right)\right)^2 = \left(1 - \frac{\sigma_1 - \sigma_j}{\sigma_1}\right)^2 \leq (1-\gamma)^2 \leq (1-\gamma)$ .
 
-Accordingly, if we set $q = O\left(\sqrt{\frac{1}{\gamma}}\log\frac{1}{\epsilon'}\right)$  where $\epsilon' = \sqrt{\epsilon/d}/d^3$,  then $\hat{p}\left(\frac{1}{\sigma_1^2}\sigma_j^2\right) \leq \epsilon'$. And the denomenator is simply equal to $c_1^{(0)}\hat{p}(1) =  c_1^{(0)}\cdot 1$. So, since $c_j^{(0)}/c_1^{(0)}\leq d^3$ with high probability, as argued earlier, (9) holds. And thus **Claim 3** is proven by setting $\mathbf{w} = \hat{p}\left(\frac{1}{\sigma_1^2} \mathbf{A} \right)\mathbf{z}^{(0)}$.
+Accordingly, if we set $q = O\left(\sqrt{\frac{1}{\gamma}}\log\frac{1}{\epsilon'}\right)$  where $\epsilon' = \sqrt{\epsilon/d}/d^3$,  then $\hat{p}\left(\frac{1}{\sigma_1^2}\sigma_j^2\right) \leq \epsilon'$. And the denomenator is simply equal to $c_1^{(0)}\hat{p}(1) =  c_1^{(0)}\cdot 1$. So, since $c_j^{(0)}/c_1^{(0)}\leq d^3$ with high probability, as argued earlier, the equation holds. And thus **Claim 3** is proven by setting $\mathbf{w} = \hat{p}\left(\frac{1}{\sigma_1^2} \mathbf{A} \right)\mathbf{z}^{(0)}$.
 
 <!--
 ### Power Method
