@@ -50,7 +50,7 @@ In particular,
 \begin{align*}
 \sum_{i=1}^n \sum_{j=1}^n \mathbf{D}_{i,j} = \sum_{i}\sum_{j}
 \| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^2 - 2 \mathbf{x}_i^\top \mathbf{x}_j =
-\sum_{i} \left(\sum_{j} \| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^2
+\sum_{i} \left(\sum_{j} (\| \mathbf{x}_i \|_2^2  + \| \mathbf{x}_j \|_2^2)
 - 2 \mathbf{x}_i^\top \sum_{j} \mathbf{x}_j \right).
 \end{align*}
 By our assumption that the points are centered around the origin i.e., $\sum_j \mathbf{x}_j = \mathbf{0}$, we can conclude that
@@ -76,4 +76,61 @@ or
 
 %\input{solutions/solution3_1}
 
+\newpage
+
+\section*{Problem 2: Opinion Dynamics}
+
+We will analyze one model of how opinions evolve in a social network through the lens of the power method.
+Consider a social network represented by a graph $G = (V,E)$
+where $V$ is a set of $n$ nodes and $E$ is a set of edges.
+Let $\mathbf{z}^{(0)} \in \mathbb{R}^n$ be a set of randomly initialized starting opinions.
+If $z_i \geq 0$, we say the $i$th node has an opinion right of the center and, if $z_i \leq 0$, we say the $i$th node has an opinion left of the center.
+
+We will use the DeGroot model where the opinions are averaged among neighbors at every step.
+Formally,
+\begin{align}\label{eq:degroot}
+z^{(t)}_i = \frac1{d_i} \sum_{j: (i,j) \in E} z^{(t-1)}_j
+\end{align}
+where the degree $d_i$ is the number of nodes adjacent to $i$.
+
+If we run this process for long enough, the opinions will converge to an average opinion.
+However, if we mean-center and normalize the opinions after each step, we will get interesting behavior.
+Formally, after the update process in Equation \ref{eq:degroot}, we will mean-center
+\begin{align*}
+\mathbf{z}^{(t)} = \mathbf{z}^{(t)} - \text{mean}(\mathbf{z}^{(t)})
+\end{align*}
+and normalize
+\begin{align*}
+\mathbf{z}^{(t)} = \mathbf{z}^{(t)} / \|\mathbf{z}^{(t)} \|_2.
+\end{align*}
+
+\subsection*{Part 1}
+Consider the adjacency matrix $\mathbf{A}$ and degree matrix $\mathbf{D}$.
+We define the adjacency matrix to encode which nodes are connected
+\begin{align*}
+\mathbf{A}_{i,j} = \begin{cases} 1 & \text{ if }(i,j) \in E \text{ or } (j,i) \in E\\ 0 & \text{ else }
+\end{cases}
+\end{align*}
+and the degree matrix to encode the degree of each node
+\begin{align*}
+\mathbf{D}_{i,j} = \begin{cases} d_i & \text{ if } i = j \\ 0 & \text{ else }
+\end{cases}.
+\end{align*}
+
+Write the opinion vector $\mathbf{z}^{(t)}$ after $t$ iterations of DeGroot dynamic updates in terms of matrix multiplication using $\mathbf{A}$ and $\mathbf{D}$.
+
+Apply the power method analysis from class to write $\mathbf{z}^{(t)}$ in terms of the eigenvector of some matrix. Remember to make this matrix symmetric so we can apply the power method.
+
+\textbf{Hint:} You will need to use the second eigenvector because the (modified) top eigenvector of this matrix is the constant vector. This is one reason the unmodified DeGroot opinion dynamics converge to a constant opinion.
+
+\subsection*{Part 2}
+Use the python library \texttt{networkx} to implement and visualize $\mathbf{z}^{(t)}$ using the direct computation and the power method computation. I recommend starting with Python code in \href{https://www.rtealwitter.com/rads2024/psets/opinions.py}{\texttt{opinions.py}}.
+
+How do the final opinions $\mathbf{z}^{(t)}$ depend on the starting opinions $\mathbf{z}^{(0)}$? What does your conclusion imply about how people might form opinions?
+
+%\input{solutions/solution3_2}
+
 \end{document}
+
+
+
