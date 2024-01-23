@@ -83,7 +83,7 @@ or
 We will analyze one model of how opinions evolve in a social network through the lens of the power method.
 Consider a social network represented by a graph $G = (V,E)$
 where $V$ is a set of $n$ nodes and $E$ is a set of edges.
-Let $\mathbf{z}^{(0)} \in \mathbb{R}^n$ be a set of randomly initialized starting opinions.
+Let $\mathbf{z}^{(0)} \in \mathbb{R}^n$ be a vector of randomly initialized starting opinions.
 If $z_i \geq 0$, we say the $i$th node has an opinion right of the center and, if $z_i \leq 0$, we say the $i$th node has an opinion left of the center.
 
 We will use the DeGroot model where the opinions are averaged among neighbors at every step.
@@ -104,7 +104,7 @@ and normalize
 \mathbf{z}^{(t)} = \mathbf{z}^{(t)} / \|\mathbf{z}^{(t)} \|_2.
 \end{align*}
 
-\subsection*{Part 1}
+\subsection*{Part 1 (2 points)}
 Consider the adjacency matrix $\mathbf{A}$ and degree matrix $\mathbf{D}$.
 We define the adjacency matrix to encode which nodes are connected
 \begin{align*}
@@ -117,18 +117,42 @@ and the degree matrix to encode the degree of each node
 \end{cases}.
 \end{align*}
 
-Write the opinion vector $\mathbf{z}^{(t)}$ after $t$ iterations of DeGroot dynamic updates in terms of matrix multiplication using $\mathbf{A}$ and $\mathbf{D}$.
+Write the opinion vector $\mathbf{z}^{(t)}$ after $t$ iterations of DeGroot dynamic updates in terms of matrix multiplication using $\mathbf{A}$ and $\mathbf{D}$ and the starting opinion vector $\mathbf{z}^{(0)}$.
 
 Apply the power method analysis from class to write $\mathbf{z}^{(t)}$ in terms of the eigenvector of some matrix. Remember to make this matrix symmetric so we can apply the power method.
 
 \textbf{Hint:} You will need to use the second eigenvector because the (modified) top eigenvector of this matrix is the constant vector. This is one reason the unmodified DeGroot opinion dynamics converge to a constant opinion.
 
-\subsection*{Part 2}
+\subsection*{Part 2 (1 point)}
+
 Use the python library \texttt{networkx} to implement and visualize $\mathbf{z}^{(t)}$ using the direct computation and the power method computation. I recommend starting with Python code in \href{https://www.rtealwitter.com/rads2024/psets/opinions.py}{\texttt{opinions.py}}.
 
 How do the final opinions $\mathbf{z}^{(t)}$ depend on the starting opinions $\mathbf{z}^{(0)}$? What does your conclusion imply about how people might form opinions?
 
 %\input{solutions/solution3_2}
+
+\section*{Problem 3: Spectral Clique Finding}
+A common tasks in data mining is to identify large \emph{cliques} in a graph. For example, in social networks, large cliques can be indicators of fraudulent accounts or networks of accounts designed to promote certain content. In this problem, we consider a spectral heuristic for finding a large clique based on the top eigenvector of the graph adjacency matrix $\mathbf{A}$: 
+\begin{itemize}
+	\item Compute the leading eigenvector $\mathbf{v}_1$ of $\mathbf{A}$. 
+	\item Let $i_1, \ldots, i_k \in \{1, \ldots, n\}$ be the indices of the $k$ entries in $\mathbf{v}_1$ with largest absolute value. 
+	\item Check if nodes $i_1, \ldots, i_k$ form a $k$-clique.
+\end{itemize}
+
+We will analyze this heuristic on a natural random graph model. Specifically, let $G$ be an Erdos-Renyi random graph: we start with $n$ nodes, and for every pair of nodes $(i,j)$, we add an edge between the pair with probability $p < 1$. To simplify the math, also assume that we add a self-loop at every vertex $i$ with probability $p$. Then, choose a fixed subset $S$ of $k$ nodes to form a clique. Connect all nodes in $S$ with edges and add self-loops. We will argue that, for sufficiently large $k$, we can expect the heuristic above to identify the nodes in the clique. 
+
+\subsection*{Part 1 (2 points)}
+Let $\mathbf{A}$ be the adjacency matrix of a random graph generated as above.
+What is $\mathbb{E}[\mathbf{A}]$?
+Then write $\mathbb{E}[\mathbf{A}]$ in terms of its eigenvalues and eigenvectors (you don't need to find the exact expression for these!).
+\textbf{Hint:} Argue that, up to multiplying by a constant, any eigenvector $\mathbf{v}$ must have $v[i] = 1$ for all $i \notin S$ and $v[i] = \alpha$ for all $i\in S$, where $\alpha$ is a constant. Then use some high school algebra 2!
+
+\subsection*{Part 2 (1 point)}
+To prove the algorithm works, it is possible to use a matrix concentration inequality to argue that the top eigenvector of $A$ is close to that of $E[A]$. Instead of doing that, let's verify things experimentally. Generate a graph $G$ according to the prescribed model with $n = 900$, $k = 
+|S|= 30$, and $p = .1$. Compute the top eigenvector of $\mathbf{A}$ and look at its 30 largest
+entries in magnitude. What fraction of nodes in the clique $S$ are among these 30 entries? Repeat the experiment and report the average fraction recovered. 
+
+%\input{solutions/solution3_3}
 
 \end{document}
 

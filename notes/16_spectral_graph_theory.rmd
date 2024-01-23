@@ -221,7 +221,7 @@ and
 
 We want to minimize both the cut size and the imbalance.
 
-We can reach an equivalent formulation if we dvide everything by $\sqrt{n}$ so that the cut indicator vector $\mathbf{c}$ has norm 1.
+We can reach an equivalent formulation if we divide everything by $\sqrt{n}$ so that the cut indicator vector $\mathbf{c}$ has norm 1.
 Then $\mathbf{c} \in \{-\frac1{\sqrt{n}}, \frac1{\sqrt{n}}\}^n$
 and
 
