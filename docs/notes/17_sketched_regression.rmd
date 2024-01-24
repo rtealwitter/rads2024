@@ -14,9 +14,6 @@ output:
 ---
 
 Consider a matrix $\mathbf{M} \in \mathbb{R}^{n \times n}$.
-If the matrix is dense, even iteratively computing the top eigenvectors takes roughly $O(n^2/ \sqrt{\epsilon})$ time.
-If we're willing to settle for approximate top eigenvectors, how can we speed up the computation?
-
 The main idea of randomized numerical linear algebra is to compress a matrix using a randomized method such as subsampling and
 then solve the problem we are interested in on the compressed matrix.
 
@@ -266,7 +263,7 @@ Applying triangle inequality, we have that
 \begin{align*}
 \| \mathbf{\Pi v} \|_2 &=
 \| \mathbf{\Pi w}_0 + c_1 \mathbf{\Pi w}_1 + c_2 \mathbf{\Pi w}_2 + \ldots \|_2 \\
-&= \| \mathbf{\Pi w}_0 \|_2 + c_1 \| \mathbf{\Pi w}_1 \|_2 + c_2 \| \mathbf{\Pi w}_2 \|_2 + \ldots \\
+&\leq \| \mathbf{\Pi w}_0 \|_2 + c_1 \| \mathbf{\Pi w}_1 \|_2 + c_2 \| \mathbf{\Pi w}_2 \|_2 + \ldots \\
 &\leq \| \mathbf{\Pi w}_0 \|_2 + \epsilon \| \mathbf{\Pi w}_1 \|_2 + \epsilon^2 \| \mathbf{\Pi w}_2 \|_2 + \ldots \\
 &\leq (1+\epsilon) \| \mathbf{w}_0 \|_2 + \epsilon (1+\epsilon) \| \mathbf{w}_1 \|_2 + \epsilon^2 (1+\epsilon) \| \mathbf{w}_2 \|_2 + \ldots \\
 &= 1 + 2 \epsilon + 2 \epsilon^2 + 2 \epsilon^3 \ldots \\

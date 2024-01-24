@@ -145,7 +145,7 @@ We will analyze this heuristic on a natural random graph model. Specifically, le
 Let $\mathbf{A}$ be the adjacency matrix of a random graph generated as above.
 What is $\mathbb{E}[\mathbf{A}]$?
 Then write $\mathbb{E}[\mathbf{A}]$ in terms of its eigenvalues and eigenvectors (you don't need to find the exact expression for these!).
-\textbf{Hint:} Argue that, up to multiplying by a constant, any eigenvector $\mathbf{v}$ must have $v[i] = 1$ for all $i \notin S$ and $v[i] = \alpha$ for all $i\in S$, where $\alpha$ is a constant. Then use some high school algebra 2!
+\textbf{Hint:} Argue that, up to multiplying by a constant, any eigenvector $\mathbf{v}$ must have $v[i] = 1$ for all $i \notin S$ and $v[i] = \alpha$ for all $i\in S$, where $\alpha$ is a constant.
 
 \subsection*{Part 2 (1 point)}
 To prove the algorithm works, it is possible to use a matrix concentration inequality to argue that the top eigenvector of $A$ is close to that of $E[A]$. Instead of doing that, let's verify things experimentally. Generate a graph $G$ according to the prescribed model with $n = 900$, $k = 
@@ -154,7 +154,31 @@ entries in magnitude. What fraction of nodes in the clique $S$ are among these 3
 
 %\input{solutions/solution3_3}
 
+\newpage
+
+\section*{Problem 4: Regression}
+
+Let $n \geq d$.
+Consider a feature matrix $\mathbf{A} \in \mathbb{R}^{n \times d}$ and a target vector $\mathbf{b} \in \mathbb{R}^d$.
+The regression problem is to find a minimizing vector
+\begin{align*}
+\mathbf{x}^* = \arg \min_{\mathbf{x} \in \mathbb{R}^d}
+\| \mathbf{Ax} - \mathbf{b} \|_2^2.
+\end{align*}
+
+In class, we showed how to quickly solve the regression problem by projecting our feature matrix and target vector into a lower dimensional space.
+In this problem, you will derive the exact solution for $\mathbf{x}^*$ and then explain how long it takes to compute it.
+
+\subsection*{Part 1 (2 points)}
+
+Show that $\mathbf{x}^* = \left(\mathbf{A}^\top \mathbf{A} \right)^{-1} \mathbf{A}^\top \mathbf{b}$.
+
+\textbf{Hint:} Compute the partial derivative with respect to $x_k$ of the $\ell_2$-norm and set it equal to 0.
+
+\subsection*{Part 2 (1 point)}
+
+Explain why computing $\left(\mathbf{A}^\top \mathbf{A} \right)^{-1} \mathbf{A}^\top \mathbf{b}$ takes $O(nd^2)$ time.
+
+%\input{solutions/solution3_4}
+
 \end{document}
-
-
-
