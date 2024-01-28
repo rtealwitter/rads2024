@@ -41,7 +41,7 @@ Our goal today is to develop faster Johnson-Lindenstrauss projections.
 
 Typically, we use sparse or structured matrices instead of fully random JL matrices because they are faster to compute.
 
-We will develop a method that reduces a vector $\mathbf{x} \in \mathbb{R}^n$ down to $m \approx \frac{\log(1/\delta)}{\epsilon^2}$ dimensions in $O(mn)$ time and guarantee that
+We will develop a method that reduces a vector $\mathbf{x} \in \mathbb{R}^n$ down to $m \approx \frac{\log(1/\delta)}{\epsilon^2}$ dimensions in roughly $O(n \log n)$ time and guarantee that
 $$
 (1-\epsilon) \|\mathbf{x}\|_2^2 \leq \|\mathbf{\Pi x}\|_2^2 \leq (1+\epsilon) \|\mathbf{x}\|_2^2.
 $$
@@ -81,7 +81,7 @@ We will show a mixing matrix $\mathbf{M}$ that satisfies the following propertie
 * We can compute $\mathbf{Mx}$ in $O(n \log n)$ time.
 
 Then we will multiply by a subsampling matrix $\mathbf{S}$ to reduce the dimension.
-The final projection is
+The projection is
 
 $$\mathbf{\Pi x} = \mathbf{SM x}.$$
 
@@ -101,7 +101,7 @@ So we will use a *pseudorandom* matrix instead.
 
 We will use the mixing matrix $\mathbf{M} = \mathbf{HD}$ where:
 
-* $\mathbf{D} \in \mathbb{R}^{n \times n}$ is a diagonal matrix with the diagonal entries $\mathbf{D}_{i} = \pm 1$ chosen uniformly at random.
+* $\mathbf{D} \in \mathbb{R}^{n \times n}$ is a diagonal matrix with the diagonal entries $D_{i,i} = \pm 1$ chosen uniformly at random.
 
 * $\mathbf{H} \in \mathbb{R}^{n \times n}$ is a Hadamard matrix.
 
@@ -170,7 +170,7 @@ For example, error correcting codes, efficient hash functions, and more.
 We will prove the following.
 
 **SHRT Mixing Lemma:**
-Let $\mathbf{H}$ be an $n \times n$ Hadamard matrix and $\mathbf{D}$ be an $n \times n$ diagonal matrix with $\mathbf{D}_{ii} = \pm 1$ chosen uniformly at random.
+Let $\mathbf{H}$ be an $n \times n$ Hadamard matrix and $\mathbf{D}$ be an $n \times n$ diagonal matrix with $D_{i,i} = \pm 1$ chosen uniformly at random.
 For any $\mathbf{x} \in \mathbb{R}^n$, let $\mathbf{z} = \mathbf{HDx}$.
 Then, with probability at least $1-\delta$, we have
 $$
@@ -182,9 +182,9 @@ for all $i$ where $c$ is a universal constant.
 Let $\mathbf{h}_i^\top$ be the $i$th row of $\mathbf{H}$. Then $z_i = \mathbf{h}_i^\top \mathbf{Dx}$ and
 \begin{align*}
 \mathbf{h}_i^\top \mathbf{D} = \frac{1}{\sqrt{n}} \begin{bmatrix} 1 & 1 & \cdots & - 1 & -1 \end{bmatrix}
-\begin{bmatrix} \mathbf{D}_{1} \\ & \mathbf{D}_{2} \\ & & \ddots \\ & & & \mathbf{D}_{n} \end{bmatrix}
+\begin{bmatrix} D_{1,1} \\ & D_{2,2} \\ & & \ddots \\ & & & D_{n,n} \end{bmatrix}
 \end{align*}
-where $D_1, \ldots, D_n$ are independent random variables with $D_j = \pm 1$ chosen uniformly at random.
+where $D_{1,1}, \ldots, D_{n,n}$ are independent random variables with $D_{,j} = \pm 1$ chosen uniformly at random.
 Equivalently,
 \begin{align*}
 \mathbf{h}_i^\top \mathbf{D} = \frac{1}{\sqrt{n}} \begin{bmatrix} R_1 & R_2  & \ldots & R_n \end{bmatrix}
