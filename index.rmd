@@ -29,11 +29,12 @@ An introduction to algorithms for efficiently finding patterns in large-scale da
   
   Assignment | Work Due | Self-grade Due
   :--- | :--- | :---
-  [Problem Set 1](psets/pset1.pdf) ([LaTeX](psets/pset1.tex)) | Friday 1/12 | Monday 1/15
-  [Problem Set 2](psets/pset2.pdf) ([LaTeX](psets/pset2.tex)) | Friday 1/19 | Monday 1/22
-  [Problem Set 3](psets/pset3.pdf) ([LaTeX](psets/pset3.tex)) | Friday 1/26 | Monday 1/29
-  [Project Proposal](project/proposal.pdf) ([LaTeX](project/proposal.tex)) | Monday 1/22 |
-  [Project](project/project.pdf) ([LaTeX](project/project.tex)) | Friday 2/2 |
+  [Problem Set 1](psets/pset1.pdf)  | Friday 1/12 | Monday 1/15
+  [Problem Set 2](psets/pset2.pdf)  | Friday 1/19 | Monday 1/22
+  [Problem Set 3](psets/pset3.pdf)  | Friday 1/26 | Monday 1/29
+  [Problem Set 4](psets/pset4.pdf)  | Friday 2/2 | Monday 2/5
+  [Project Proposal](project/proposal.pdf) | Monday 1/22 |
+  [Project](project/project.pdf) | Friday 2/2 |
   </div>
 </div>
 
