@@ -56,6 +56,6 @@ Tuesday 1/23   | Power Method | [Notes](notes/15_power_method.html) | [Slides](l
 Wednesday 1/24 | Spectral Graph Theory | [Notes](notes/16_spectral_graph_theory.html) | [Slides](lectures/lecture11.pdf) | </tr><tr>
 Thursday 1/25  | Sketched Regression | [Notes](notes/17_sketched_regression.html) | [Slides](lectures/lecture12.pdf) | </tr><tr>
 Monday 1/29    | Fast JL Transform | [Notes](notes/18_fast_jl_transform.html) | [Slides](lectures/lecture13.pdf) | </tr><tr>
-Tuesday 1/30   | Sparse Recovery | [Notes](notes/19_sparse_recovery.html) |  | </tr><tr>
+Tuesday 1/30   | Sparse Recovery | [Notes](notes/19_sparse_recovery.html) | [Slides](lectures/lecture14.pdf) | </tr><tr>
 
 
