@@ -89,11 +89,11 @@ We may therefore suspect that if we make stronger assumptions on the random vari
 The central limit theorem gives us a hint about what type of random variables we should consider.
 
 **Central Limit Theorem:**
-Any sum of *mutually independent* and identically distributed random variables $X_1, \ldots, X_k$ with mean $\mu$ and finite variance $\sigma^2$ converges to a Gaussian random variable with mean $k \cdot \mu$ and variance $k \cdot \sigma^2$ as $k$ goes to infinity.
+Any sum of *mutually independent* and identically distributed random variables $X_1, \ldots, X_n$ with mean $\mu$ and finite variance $\sigma^2$ converges to a Gaussian random variable with mean $n \cdot \mu$ and variance $n \cdot \sigma^2$ as $k$ goes to infinity.
 Formally,
 $$
 \lim_{n \rightarrow \infty}
-\sum_{i=1}^k X_i \sim \mathcal{N}(k \mu, k \sigma^2).
+\sum_{i=1}^n X_i \sim \mathcal{N}(n \mu, n \sigma^2).
 $$
 
 By linearity of expectation and linearity of variance, we know what the mean and variance of the sum should be. The interesting part of the central limit theorem is that the sum converges to a Gaussian distribution.
@@ -101,17 +101,17 @@ By linearity of expectation and linearity of variance, we know what the mean and
 We stated the central limit theorem for random variables that are identically distributed so that we could cleanly describe the expectation and variance of the sum. But the central limit theorem also holds for random variables that are not identically distributed.
 
 For the central limit theorem to hold, we assumed that the random variables are *mutually independent*.
-Recall that $X_1, \ldots, X_k$ are mutually independent if, for all values $v_1, \ldots, v_k$, we have
+Recall that $X_1, \ldots, X_n$ are mutually independent if, for all values $v_1, \ldots, v_n$, we have
 $$
-\Pr( X_1=v_1, \ldots, X_k = v_k)
+\Pr( X_1=v_1, \ldots, X_n = v_n)
 $$
 $$
-= \Pr(X_1=v_1) \cdot \ldots \cdot \Pr(X_k = v_k).
+= \Pr(X_1=v_1) \cdot \ldots \cdot \Pr(X_n = v_n).
 $$
 
 Let's consider the central limit in the context of the coin flip example.
-The figure below shows how closely the sum of $k$ coin flips is approximated by the corresponding Gaussian distribution.
-As $k$ increases, the approximation gets better and better.
+The figure below shows how closely the sum of $n$ coin flips is approximated by the corresponding Gaussian distribution.
+As $n$ increases, the approximation gets better and better.
 
 ![](images/central_limit_theorem.png)
 
@@ -144,12 +144,12 @@ We'll state three exponential concentration inequalities today but there are man
 If you're having trouble finding an appropriate bound for your case, *Wikipedia is your friend.*
 
 **Chernoff Bound:**
-Let $X_1, \ldots, X_k$ be independent binary random variables.
+Let $X_1, \ldots, X_n$ be independent binary random variables.
 That is, $X_i \in \{0,1\}$.
 Let $p_i = \mathbb{E}[X_i]$ where $0 < p_i < 1$.
 Choose a parameter $\epsilon > 0$.
-Then the sum $S = \sum_{i=1}^k X_i$,
-which has mean $\mu = \sum_{i=1}^k p_i$,
+Then the sum $S = \sum_{i=1}^n X_i$,
+which has mean $\mu = \sum_{i=1}^n p_i$,
 satisfies
 $$
 \Pr( S \geq (1+\epsilon) \mu )
@@ -169,36 +169,39 @@ $$
 \Pr(|S - \mu| \geq \epsilon \mu) \leq 2 \exp\left(\frac{-\epsilon^2 \mu}{3}\right).
 $$
 
+<!--- Inequality in wrong direction.
+
 Looking back, we may realize that the last expression looks similar to the Gaussian tail bound.
 This is because $\sigma \leq \sqrt{\mu}$.
 To see this, observe that
 $$
-\sigma^2 = \textrm{Var}[S] = \sum_{i=1}^k \textrm{Var}[X_i] = \sum_{i=1}^k \mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2
+\sigma^2 = \textrm{Var}[S] = \sum_{i=1}^n \textrm{Var}[X_i] = \sum_{i=1}^n \mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2
 $$
 $$
-\leq \sum_{i=1}^k \mathbb{E}[X_i^2] = \sum_{i=1}^k \mathbb{E}[X_i] = \mu.
+\leq \sum_{i=1}^n \mathbb{E}[X_i^2] = \sum_{i=1}^n \mathbb{E}[X_i] = \mu.
 $$
 Here, we used the property that squaring a binary variable does not change its value.
 Setting $k = \epsilon \sqrt{\mu}$
-so that $\epsilon \mu = k \sigma$, the Chernoff bound becomes
+so that $\epsilon \mu \geq k \sigma$, the Chernoff bound becomes
 $$
-\Pr(|S - \mu| \geq \epsilon \mu) =
-\Pr(|S - \mu| \geq k \sigma)
+\Pr(|S - \mu| \geq k \sigma) \geq
+\Pr(|S - \mu| \geq \epsilon \mu)
 $$
 $$
 \leq 2 \exp\left(\frac{-\epsilon^2 \mu}{3}\right) = 2 \exp\left(\frac{-k^2}{3}\right).
 $$
 Notice this is basically the same as the Gaussian tail bound but with a *slightly* worse constant in the exponent.
+--->
 
 The Chernoff bound may seem overly restrictive because we require that each variable is binary.
 The Bernstein inequality relaxes the assumption so that we can consider random variables defined on the inverval from $-1$ to $1$.
 
 **Bernstein Inequality:**
-Let $X_1, \ldots, X_k$ be independent random variables with each $X_i \in [-1, 1]$.
-Let $\mu = \sum_{i=1}^k \mathbb{E}[X_i]$
-and $\sigma^2 = \sum_{i=1}^k \textrm{Var}[X_i]$.
+Let $X_1, \ldots, X_n$ be independent random variables with each $X_i \in [-1, 1]$.
+Let $\mu = \sum_{i=1}^n \mathbb{E}[X_i]$
+and $\sigma^2 = \sum_{i=1}^n \textrm{Var}[X_i]$.
 Then, for any $k \leq \frac{\sigma}{2}$,
-the sum $S = \sum_{i=1}^k X_i$ satisfies
+the sum $S = \sum_{i=1}^n X_i$ satisfies
 $$
 \Pr(|S - \mu| > k \sigma) \leq 2 \exp\left(\frac{-k^2}{4}\right).
 $$
@@ -209,13 +212,13 @@ Of course, while weaker than Chernoff bound, the assumption in the Bernstein bou
 Hoeffding's inequality relaxes it further.
 
 **Hoeffding's Inequality:**
-Let $X_1, \ldots, X_k$ be independent random variables with each $X_i \in [a_i, b_i]$.
-Let $\mu= \sum_{i=1}^k \mathbb{E}[X_i]$.
+Let $X_1, \ldots, X_n$ be independent random variables with each $X_i \in [a_i, b_i]$.
+Let $\mu= \sum_{i=1}^n \mathbb{E}[X_i]$.
 Then, for any $k >0$,
-the sum $S = \sum_{i=1}^k X_i$ satisfies
+the sum $S = \sum_{i=1}^n X_i$ satisfies
 $$
 \Pr( | S - \mu | > k )
-\leq 2 \exp\left(\frac{-k^2}{\sum_{i=1}^k (b_i - a_i)^2}\right).
+\leq 2 \exp\left(\frac{-k^2}{\sum_{i=1}^n (b_i - a_i)^2}\right).
 $$
 
 Notice that $\sigma$ no longer appears in the bound.
@@ -235,35 +238,35 @@ Now that we have rigorous exponential concentration inequalities, let's apply th
 
 **Biased Coin Bound:**
 Let the probability that a coin lands heads be $b$.
-Choose $k \geq \frac{3\log(2/\delta)}{\epsilon^2}$.
-If we flip a biased coin $k$ times, let $S$ be the number of heads.
-Notice that $\mu = bk$.
+Choose $n \geq \frac{3\log(2/\delta)}{\epsilon^2}$.
+If we flip a biased coin $n$ times, let $S$ be the number of heads.
+Notice that $\mu = bn$.
 Then
 $$
-\Pr(| S - b k | \geq \epsilon k) \leq \delta.
+\Pr(| S - b k | \geq \epsilon n) \leq \delta.
 $$
 
 **Proof:**
 We use the Chernoff bound because the number of heads is a sum of binary random variables.
 From the Chernoff bound, we know that for any $\epsilon'$,
 $$
-\Pr( | S - bk | \geq \epsilon' bk ) \leq 2 \exp\left(\frac{-\epsilon'^2 bk}{3}\right).
+\Pr( | S - bn | \geq \epsilon' bn ) \leq 2 \exp\left(\frac{-\epsilon'^2 bn}{3}\right).
 $$
 Let's set $\epsilon' = \frac{\epsilon}{b}$.
 Then
 $$
-\Pr( | S - bk | \geq \epsilon k ) \leq 2 \exp\left(\frac{-\epsilon^2 k}{3b}\right)
-\leq 2 \exp\left(\frac{-\epsilon^2 k}{3}\right).
+\Pr( | S - bn | \geq \epsilon n ) \leq 2 \exp\left(\frac{-\epsilon^2 n}{3b}\right)
+\leq 2 \exp\left(\frac{-\epsilon^2 n}{3}\right).
 $$
 For the last inequality, we used the fact that $b \leq 1$.
 If we want the probability to be at most $\delta$, then we can set $\delta$ greater than the probability and solve for $k$.
 Doing this, we see that
 $$
-2 \exp\left(\frac{-\epsilon^2 k}{3}\right) \leq \delta
+2 \exp\left(\frac{-\epsilon^2 n}{3}\right) \leq \delta
 \Leftrightarrow
-\frac{-\epsilon^2 k}{3} \leq \log \frac{\delta}{2}
+\frac{-\epsilon^2 n}{3} \leq \log \frac{\delta}{2}
 \Leftrightarrow
-k \geq \frac{3 \log(2/\delta)}{\epsilon^2}.
+n \geq \frac{3 \log(2/\delta)}{\epsilon^2}.
 $$
 
 Notice that we have a very gentle dependence on $\delta$.
